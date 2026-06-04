@@ -32,9 +32,22 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/variety">Variety</a>
                     </li>
+                    @guest
                     <li class="nav-item">
                         <a class="nav-link" href="/signup">Sign Up</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    @endguest
+                    @auth
+                    <li class="nav-item">
+                        <form action="/logout" method="POST" class="d-inline">
+                            @csrf
+                            <button type="submit" class="nav-link border-0 bg-transparent">Logout</button>
+                        </form>
+                    </li>
+                    @endauth
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>

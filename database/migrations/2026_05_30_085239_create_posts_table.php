@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rice_products', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('type');
-            $table->decimal('price', 8, 2);
-            $table->integer('stock');
             $table->timestamps();
+            $table->string('title');
+            $table->longText('body');
+            $table->foreignId('user_id')->constrained();
         });
     }
 
@@ -25,7 +24,7 @@ return new class extends Migration
      * Reverse the migrations.
      */
     public function down(): void
-    {
-        Schema::dropIfExists('rice_products');
+    {   
+        Schema::dropIfExists('posts');
     }
 };
