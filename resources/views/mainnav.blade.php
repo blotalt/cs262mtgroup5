@@ -17,12 +17,6 @@
                     <li class="nav-item">   
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/pricemarket">Price Market</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/variety">Variety</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">News about</a>
                         <ul class="dropdown-menu">
@@ -31,6 +25,12 @@
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pricemarket">Price Market</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/variety">Variety</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/signup">Sign Up</a>
