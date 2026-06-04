@@ -19,3 +19,5 @@ Route::get('/variety', function () {
 Route::get('/signup', function () {
     return view('signup');
 });
+
+Route::post('/register', [UserController::class, 'register']);
