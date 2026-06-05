@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Login Page</h1>
-    <form action="/login" method="post">
+    <form action="{{ url('/login') }}" method="post">
         @csrf
         <input type="text" name="loginname" placeholder="Username">
         <input type="password" name="loginpassword" placeholder="Password">

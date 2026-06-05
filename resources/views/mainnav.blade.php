@@ -15,36 +15,39 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">   
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">News about</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+                        <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/pricemarket">Price Market</a>
+                        <a class="nav-link active" href="{{ url('/news') }}">News</a>
+                    </li>
+
+                    @auth
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url('/dashboard') }}">Dashboard</a>
+                    </li>
+                    @endauth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/pricemarket') }}">Price Market</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/variety">Variety</a>
+                        <a class="nav-link" href="{{ url('/variety') }}">Variety</a>
                     </li>
                     @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="/signup">Sign Up</a>
+                        <a class="nav-link" href="{{ url('/signup') }}">Sign Up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
+                       <a class="nav-link" href="{{ url('/login') }}">Login</a>
                     </li>
                     @endguest
                     @auth
+                     <li class="nav-item">
+                        <span class="nav-link">Hi, {{ auth()->user()->name }}!</span>
+                    </li>
                     <li class="nav-item">
-                        <form action="/logout" method="POST" class="d-inline">
+                        <form action="{{ url('/logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="nav-link border-0 bg-transparent">Logout</button>
+                            <button type="submit">Logout</button>
                         </form>
                     </li>
                     @endauth

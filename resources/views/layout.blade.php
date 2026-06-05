@@ -25,6 +25,6 @@
     </div>
   </div>
 </div>
-@yield('dashboard')
+@yield('content')
     </body>
 </html>

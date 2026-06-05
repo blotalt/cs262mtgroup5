@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
@@ -24,6 +24,18 @@ Route::get('/login', function () {
     return view('login');
 });
 
+Route::get('/dashboard', function () {
+    $posts = auth()->user()->usersCoolPosts()->latest()->get();
+    return view('dashboard', ['posts' => $posts]);
+})->middleware('auth');
+
+Route::get('/news', [PostController::class, 'news']);
+
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout']);
+
+Route::post('/create-post', [PostController::class, 'createPost']);
+Route::get('/edit-post/{post}', [PostController::class, 'showEditScreen']);
+Route::put('/edit-post/{post}', [PostController::class, 'updatePost']);
+Route::delete('/delete-post/{post}', [PostController::class, 'deletePost']);
