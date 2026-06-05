@@ -42,6 +42,9 @@
                     @endguest
                     @auth
                     <li class="nav-item">
+                        <span class="nav-link">Hi, {{ auth()->user()->name }}!</span>
+                    </li>
+                    <li class="nav-item">
                         <form action="/logout" method="POST" class="d-inline">
                             @csrf
                             <button type="submit" class="nav-link border-0 bg-transparent">Logout</button>
