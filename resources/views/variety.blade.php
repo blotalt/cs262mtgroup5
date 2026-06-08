@@ -3,7 +3,7 @@
         [
             'name' => 'Phka Rumduol', 
             'khmer' => 'ផ្ការំដួល', 
-            'img' => 'romdoul.jpg',
+            'img' => 'jasmine.png',
             'location' => 'Takeo, Kampong Speu', 
             'desc' => "Cambodia's most prized aromatic variety, awarded World's Best Rice multiple times. Delicate floral fragrance and soft...",
             'type' => 'Jasmine', 'demand' => 'Very High', 'yield' => '3.2 t/ha', 'cycle' => '155 days', 'season' => 'Wet'
@@ -11,7 +11,7 @@
         [
             'name' => 'Sen Kra Ob', 
             'khmer' => 'សែនក្រអូប', 
-            'img' => 'ricemarket_1.jpg',
+            'img' => 'fragrant.jpg',
             'location' => 'Battambang, Pursat', 
             'desc' => "The most widely grown variety in Cambodia. Reliable yield and mild flavor make it the staple export rice of the country.",
             'type' => 'Jasmine', 'demand' => 'Very High', 'yield' => '5.5 t/ha', 'cycle' => '122 days', 'season' => 'Wet'
@@ -19,35 +19,35 @@
         [
             'name' => 'Neab Dam', 
             'khmer' => 'នាងដំ', 
-            'img' => 'ricemarket_1.jpg',
+            'img' => 'blackrice.jpg',
             'location' => 'Kampong Thom', 
             'desc' => "Traditional Cambodian black rice with deep purple bran layer. Rich in anthocyanins, preferred for ceremonial dishes.",
             'type' => 'Black Rice', 'demand' => 'High', 'yield' => '2.8 t/ha', 'cycle' => '148 days', 'season' => 'Dry'
         ],
         [
-            'name' => 'Phka Rumduol', 
-            'khmer' => 'ផ្ការំដួល',
-            'img' => 'ricemarket_1.jpg', 
-            'location' => 'Takeo, Kampong Speu', 
-            'desc' => "Cambodia's most prized aromatic variety, awarded World's Best Rice multiple times. Delicate floral fragrance and soft...",
-            'type' => 'Jasmine', 'demand' => 'Very High', 'yield' => '3.2 t/ha', 'cycle' => '155 days', 'season' => 'Wet'
+            'name' => 'Phka Rumdeng', 
+            'khmer' => 'ផ្ការំដេង',
+            'img' => 'redrice.png', 
+            'location' => 'Takeo, Battambang, Siem Reap', 
+            'desc' => "A whole-grain red rice with a reddish-brown hue, due to its outer bran layer, which remains intact.",
+            'type' => 'Whole-grain', 'demand' => 'High', 'yield' => '3.2 t/ha', 'cycle' => '155 days', 'season' => 'Dry'
         ],
         [
-            'name' => 'Sen Kra Ob', 
-            'khmer' => 'សែនក្រអូប', 
-            'img' => 'ricemarket_1.jpg',
+            'name' => 'Angkor Damnaeb', 
+            'khmer' => 'អង្ករដំណើប', 
+            'img' => 'glutinous.png',
             'location' => 'Battambang, Pursat', 
-            'desc' => "The most widely grown variety in Cambodia. Reliable yield and mild flavor make it the staple export rice of the country.",
-            'type' => 'Jasmine', 'demand' => 'Very High', 'yield' => '5.5 t/ha', 'cycle' => '122 days', 'season' => 'Wet'
+            'desc' => "When cooked, it is called បាយដំណើប (bai damnaeb). It is a cornerstone of Cambodian cuisine and is used in a wide variety of daily staples and festive desserts",
+            'type' => 'Glutinous', 'demand' => 'High', 'yield' => '5.5 t/ha', 'cycle' => '122 days', 'season' => 'Wet'
         ],
         [
-            'name' => 'Neab Dam', 
-            'khmer' => 'នាងដំ', 
-            'img' => 'ricemarket_1.jpg',
-            'location' => 'Kampong Thom', 
-            'desc' => "Traditional Cambodian black rice with deep purple bran layer. Rich in anthocyanins, preferred for ceremonial dishes.",
-            'type' => 'Black Rice', 'demand' => 'High', 'yield' => '2.8 t/ha', 'cycle' => '148 days', 'season' => 'Dry'
-        ],
+            'name' => 'Angkor Samroub', 
+            'khmer' => 'អង្ករសម្រូប', 
+            'img' => 'brown.png',
+            'location' => 'Preah Vihear, Kampong Speu', 
+            'desc' => "Unpolished rice that retains the bran layer, resulting in a tan color and chewier texture. Nutty and earthy with a firmer bite.",
+            'type' => 'Brown Rice', 'demand' => 'High', 'yield' => '2.8 t/ha', 'cycle' => '148 days', 'season' => 'All'
+        ]
     ];
 @endphp
 
@@ -104,9 +104,9 @@
                 <button class="pill-filter active">All Types</button>
                 <button class="pill-filter">Jasmine</button>
                 <button class="pill-filter">Black Rice</button>
-                <button class="pill-filter">Red Rice</button>
+                
                 <button class="pill-filter">Glutinous</button>
-                <button class="pill-filter">Long Grain White</button>
+                <button class="pill-filter">Whole-Grain White</button>
                 <button class="pill-filter">Brown Rice</button>
             </div>
 
@@ -125,7 +125,7 @@
                 <div class="card h-100 rice-card border-0 shadow-sm rounded-4 overflow-hidden">
                     <!-- Image Wrapper -->
                     <div class="card-img-wrapper position-relative">
-                        <img src="{{ asset('images/rice_market_graph_stuff/' . $rice['img']) }}" class="card-img-top" alt="{{ $rice['name'] }}" style="height: 200px; object-fit: cover;">
+                        <img src="{{ asset('images/ricetypes/' . $rice['img']) }}" class="card-img-top" alt="{{ $rice['name'] }}" style="height: 200px; object-fit: cover;">
                         <span class="badge-type position-absolute top-0 start-0 m-3 bg-success">{{ $rice['type'] }}</span>
                     </div>
                     

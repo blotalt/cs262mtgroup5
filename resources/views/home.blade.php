@@ -15,12 +15,12 @@
 
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="/images/rice-field.jpg" class="d-block w-100 carousel-img" alt="Cambodian rice field">
+                <img src="/images/extra/ricefields.png" class="d-block w-100 carousel-img" alt="Cambodian rice field">
                 
                 <div class="carousel-caption text-start hero-content">
                     <span class="hero-badge">Live Market Data</span>
                     <h1>From Field to Market</h1>
-                    <p>Transparent pricing for Cambodia's premier rice varieties</p>
+                    <p>Connecting Cambodia’s rice producers and buyers through accurate, real-time market pricing and regional insights. With transparent pricing for Cambodia's premier rice varieties.</p>
 
                     <div class="d-flex gap-3 mt-4">
                         <a href="/pricemarket" class="btn btn-warning">
@@ -34,18 +34,18 @@
             </div>
 
             <div class="carousel-item">
-                <img src="/images/rice-farmer.jpg" class="d-block w-100 carousel-img" alt="Cambodian rice farmer">
+                <img src="/images/extra/cambodia rice farmer.jpg" class="d-block w-100 carousel-img" alt="Cambodian rice farmer">
 
                 <div class="carousel-caption text-start hero-content">
                     <span class="hero-badge">Cambodian Rice</span>
                     <h1>Supporting Local Farmers</h1>
-                    <p>Connecting farmers, traders, and buyers through reliable market information</p>
+                    <p>Connecting farmers, traders, and buyers through accurate rice market data and pricing insights.</p>
 
                     <div class="d-flex gap-3 mt-4">
-                        <a href="{{ url('/market-prices') }}" class="btn btn-warning">
+                        <a href="/pricemarket" class="btn btn-warning">
                             View Market Prices
                         </a>
-                        <a href="{{ url('/about') }}" class="btn btn-outline-light">
+                        <a href="/about" class="btn btn-outline-light">
                             Learn More
                         </a>
                     </div>
@@ -53,18 +53,18 @@
             </div>
 
             <div class="carousel-item">
-                <img src="/images/rice-field-story.jpg" class="d-block w-100 carousel-img" alt="Rice field landscape">
+                <img src="/images/extra/ricelandscape.jpg" class="d-block w-100 carousel-img" alt="Rice field landscape">
 
                 <div class="carousel-caption text-start hero-content">
                     <span class="hero-badge">Daily Price Updates</span>
                     <h1>Track Rice Prices</h1>
-                    <p>Explore rice price trends from Cambodia's provincial markets</p>
+                    <p>Explore rice price trends from Cambodia’s provincial markets, including variations across regions, seasons, and local trading conditions.</p>
 
                     <div class="d-flex gap-3 mt-4">
-                        <a href="{{ url('/market-prices') }}" class="btn btn-warning">
+                        <a href="/pricemarket" class="btn btn-warning">
                             Explore Prices
                         </a>
-                        <a href="{{ url('/varieties') }}" class="btn btn-outline-light">
+                        <a href="/variety" class="btn btn-outline-light">
                             Rice Varieties
                         </a>
                     </div>
@@ -92,11 +92,11 @@
                 <p>Rice Varieties</p>
             </div>
             <div class="col-md-4 stat-item">
-                <h3>15</h3>
+                <h3>60+</h3>
                 <p>Export Countries</p>
             </div>
             <div class="col-md-4 stat-item">
-                <h3>24</h3>
+                <h3>25</h3>
                 <p>Farming Provinces</p>
             </div>
         </div>
@@ -109,11 +109,8 @@
             <div class="col-lg-7">
                 <div class="video-card">
                     <div class="ratio ratio-16x9">
-                        <iframe src="https://www.youtube.com/embed/tRJAn5GnnO8?si=3yFEZ5GwYlsLGPoz"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-                        </iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/9FmFKUwm41o?si=H0blIlSJHAfosmLA" title="YouTube video player" 
+                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -152,25 +149,25 @@
                 <div class="row g-3 mt-4">
                     <div class="col-sm-6">
                         <div class="mini-stat">
-                            <h3>24</h3>
+                            <h3>25</h3>
                             <p>Provinces Covered</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mini-stat">
-                            <h3>15+</h3>
+                            <h3>60+</h3>
                             <p>Export Markets</p>
                         </div>
                     </div>
                 </div>
 
-                <a href="{{ url('/market-prices') }}" class="btn btn-success mt-4">
+                <a href="/pricemarket" class="btn btn-success mt-4">
                     Explore Market Data →
                 </a>
             </div>
 
             <div class="col-lg-6">
-                <img src="/images/rice-farmer.jpg" class="about-image" alt="Cambodian rice farmer">
+                <img src="/images/riceheartandsoul/heartandsoul_4.jpg" class="about-image" alt="Cambodian rice farmer">
             </div>
         </div>
     </div>

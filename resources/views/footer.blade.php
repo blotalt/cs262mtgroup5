@@ -26,10 +26,10 @@
                 <h6 class="text-warning text-uppercase fw-bold mb-3">Rice Varieties</h6>
                 <ul class="list-unstyled text-white-50">
                     <li class="mb-2">Phka Rumduol</li>
-                    <li class="mb-2">Neaw Sticky Rice</li>
-                    <li class="mb-2">Angkor Red</li>
-                    <li class="mb-2">Neab Dam Black</li>
-                    <li>Organic Brown</li>
+                    <li class="mb-2">Sen Kra Ob</li>
+                    <li class="mb-2">Neab Dam</li>
+                    <li class="mb-2">Phka Rumdeng</li>
+                    <li class="mb-2">Angkor Damnaeb</li>
                 </ul>
             </div>
 

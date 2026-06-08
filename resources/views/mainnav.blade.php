@@ -9,8 +9,7 @@
                     🌾
                 </div>
                 <div>
-                    <span class="fw-bold d-block lh-1"
-                        style="font-size: 1.2rem; letter-spacing: 0.5px;">
+                    <span class="fw-bold d-block lh-1" style="font-size: 1.2rem; letter-spacing: 0.5px;">
                         KhmerRice
                     </span>
                     <small class="text-white-50" style="font-size: 0.65rem;">
@@ -19,9 +18,7 @@
                 </div>
             </a>
 
-            <button class="navbar-toggler" type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -30,76 +27,85 @@
 
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-3">
                     <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="/home">Home</a>
+                        <a class="nav-link nav-link-custom {{ request()->is('home') ? 'active' : '' }}"
+                            href="/home">Home</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="/variety">Varieties</a>
+                        <a class="nav-link nav-link-custom {{ request()->is('variety') ? 'active' : '' }}"
+                            href="/variety">Varieties</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="/pricemarket">Market Prices</a>
+                        <a class="nav-link nav-link-custom {{ request()->is('pricemarket') ? 'active' : '' }}"
+                            href="/pricemarket">Market Prices</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="/about">About</a>
+                        <a class="nav-link nav-link-custom {{ request()->is('about') ? 'active' : '' }}"
+                            href="/about">About</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="/dashboard">Dashboard</a>
+                        <a class="nav-link nav-link-custom {{ request()->is('news') ? 'active' : '' }}"
+                            href="/news">News</a>
                     </li>
 
-                      <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="/news">News</a>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom {{ request()->is('dashboard') ? 'active' : '' }}"
+                            href="/dashboard">Dashboard</a>
                     </li>
-                    
+
+
                 </ul>
+         
+            <div class="d-flex align-items-center gap-3">
 
-              
-
-
-                <div class="d-flex align-items-center gap-3">
-
-                    <!-- Search -->
-                    <div class="position-relative">
-                        <input class="form-control form-control-sm search-nav-input ps-4"
-                            type="search"
-                            placeholder="Search rice...">
-
-                        <span class="position-absolute top-50 start-0 translate-middle-y ms-2 text-white-50">
-                            🔍
-                        </span>
-                    </div>
-
-                    @guest
-                        <a href="/signup"
-                            class="text-white text-decoration-none small fw-semibold">
-                            Sign Up
-                        </a>
-
-                        <a href="/login"
-                            class="btn btn-gold btn-sm">
-                            Login
-                        </a>
-                    @endguest
-
-                    @auth
-                        <span class="small text-white-50">
-                            Hi, {{ auth()->user()->name }}!
-                        </span>
-
-                        <form action="{{ url('/logout') }}" method="POST">
-                            @csrf
-                            <button type="submit"
-                                class="btn btn-outline-light btn-sm">
-                                Logout
-                            </button>
-                        </form>
-                    @endauth
-
+                <!-- Search -->
+                <div class="position-relative">
+                    <input class="form-control form-control-sm search-nav-input ps-5" type="search"
+                        placeholder="Search rice...">
+                    <span
+                        class="position-absolute top-50 start-0 translate-middle-y ms-3 text-black-50 d-flex align-items-center"
+                        style="pointer-events: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                    </span>
                 </div>
 
-            </div>
-        </div>
+                @guest
+                <a href="/signup" class="text-white text-decoration-none small fw-semibold">
+                    Sign Up
+                </a>
+
+                <a href="/login" class="btn btn-gold btn-sm">
+                    Login
+                </a>
+                @endguest
+    
+
+                @auth
+                <span class="text-white small">
+                    Welcome, {{ auth()->user()->name }}
+                </span>
+
+                <form action="/logout" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-light btn-sm">
+                        Logout
+                    </button>
+                </form>
+                 @endauth
+
+                </div> 
+
+            </div> 
+
+        </div> 
+
     </nav>
+
 </header>

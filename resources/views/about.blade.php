@@ -4,43 +4,43 @@
                 'name' => 'Chhayhour Ly',
                 'role' => 'Leader',
                 'location' => 'Phnom Penh',
-                'image' => '1-intro-photo-final.jpg'
+                'image' => 'chhayhour.jpg   '
             ],
             [
                 'name' => 'Molinza Chum',
                 'role' => 'Frontend',
                 'location' => 'Phnom Penh',
-                'image' => '#'
+                'image' => 'molinza.jpg'
             ],
             [
                 'name' => 'Longly Chea',
                 'role' => 'Frontend',
                 'location' => 'Phnom Penh',
-                'image' => '#'
+                'image' => 'longly.png'
             ],
             [
                 'name' => 'Chattra Hean',
                 'role' => 'BackEnd',
                 'location' => 'Phnom Penh',
-                'image' => '#'
+                'image' => 'chaktra.jpg'
             ],
             [
                 'name' => 'Syphanna Kong',
                 'role' => 'Backend',
                 'location' => 'Phnom Penh',
-                'image' => '#'
+                'image' => 'phanna.jpg'
             ],
             [
-                'name' => 'Kunvitourichard Hour',
+                'name' => 'Kunvitourichard Hou',
                 'role' => 'QA/QC',
                 'location' => 'Phnom Penh',
-                'image' => '#'
+                'image' => 'vitou.jpg'
             ],
             [
-                'name' => 'Sherif Shefiy',
+                'name' => 'Sharif Shefiy',
                 'role' => 'QA/QC',
                 'location' => 'Phnom Penh',
-                'image' => ''
+                'image' => 'sharif.jpeg'
             ],
             
         ];
@@ -72,7 +72,7 @@
                 KhmerRice was established under the Ministry of Agriculture, Forestry and Fisheries of Cambodia to create a transparent, data-driven marketplace for the country's most important crop.
             </p>
             <p class="text-muted mb-4" style="line-height: 1.8;">
-                We aggregate real-time price data from 24 provincial markets, maintain the national rice variety registry, and provide tools for farmers, millers, exporters, and researchers to make informed decisions.
+                We aggregate real-time price data from 25 provincial markets, maintain the national rice variety registry, and provide tools for farmers, millers, exporters, and researchers to make informed decisions.
             </p>
             <p class="text-muted" style="line-height: 1.8;">
                 Cambodia's rice sector employs over 3.5 million farming families. Our platform helps ensure they receive fair market prices and connect with international buyers.
@@ -89,7 +89,7 @@
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                             </div>
                         </div>
-                        <h3 class="fw-bold text-warning mb-1">+</h3>
+                        <h3 class="fw-bold text-warning mb-1">3.5 Million+</h3>
                         <p class="text-muted small mb-0">Farming Families</p>
                     </div>
                 </div>
@@ -111,7 +111,7 @@
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                             </div>
                         </div>
-                        <h3 class="fw-bold text-warning mb-1">+</h3>
+                        <h3 class="fw-bold text-warning mb-1">60+</h3>
                         <p class="text-muted small mb-0">Export Countries</p>
                     </div>
                 </div>
@@ -142,7 +142,7 @@
         @foreach($teamMembers as $member)
             <div class="col-md-4">
                 <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden" style="background-color: #ffffff;">
-                    <div style="height: 220px; overflow: hidden;">
+                    <div style="height: 400px; overflow: hidden;">
                         <img src="{{ asset('images/team_members_stuff/' .$member['image']) }}" class="w-100 h-100" style="object-fit: cover;" alt="{{ $member['name'] }}">
                     </div>
                     <div class="card-body p-4">
@@ -193,7 +193,7 @@
                 </div>
                 <div>
                     <h6 class="fw-bold mb-1 text-dark">Phone</h6>
-                    <p class="text-muted small mb-0">+855 99 999 99</p>
+                    <p class="text-muted small mb-0">+855 23 456 789</p>
                 </div>
             </div>
 

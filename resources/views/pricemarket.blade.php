@@ -7,7 +7,7 @@
                 <div class="col-lg-8">
                     <span class="section-label">Live Data · Updated Today</span>
                     <h1 class="display-5 fw-bold mt-1 mb-2" style="font-family: Georgia, serif;">Market Prices</h1>
-                    <p class="text-white-50 lead fs-6">Track daily Cambodian rice prices from provincial markets.</p>
+                    <p class="text-white-50 lead fs-6">Track daily Cambodian rice prices from provincial markets, farmers markets, and more...</p>
                 </div>
             </div>
         </div>  
@@ -18,7 +18,7 @@
 <section class="prices-section py-5">
     <div class="container">
         <h2 class="fw-bold mb-1">Latest Market Prices</h2>
-        <p class="text-muted mb-4">Updated daily from 24 provincial markets</p>
+        <p class="text-muted mb-4">Updated daily from 25 provincial markets</p>
 
         <div class="price-table-wrapper rounded-3 shadow-sm overflow-hidden">
             <table class="table table-hover price-table mb-0">
@@ -60,7 +60,7 @@
                     
                     <tr>
                         <td>
-                            <div class="rice-name">Angkor Red</div>
+                            <div class="rice-name">Phka Rumdeng</div>
                             <div class="rice-type">Red Rice</div>
                         </td>
                         <td>Siem Reap</td>
@@ -72,7 +72,7 @@
 
                     <tr>
                         <td>
-                            <div class="rice-name">Neaw Sticky Rice</div>
+                            <div class="rice-name">Angkor Damnaeb</div>
                             <div class="rice-type">Glutinous Rice</div>
                         </td>
                         <td>Prey Veng</td>
@@ -84,7 +84,7 @@
 
                     <tr>
                         <td>
-                            <div class="rice-name">Organic Brown</div>
+                            <div class="rice-name">Angkor Samroub</div>
                             <div class="rice-type">Brown Rice</div>
                         </td>
                         <td>Mondulkiri</td>
