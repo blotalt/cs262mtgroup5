@@ -36,7 +36,7 @@ Route::get('/dashboard', function () {
 });
 
 Route::get('/dashboard', function () {
-    $posts = auth()->user()->usersCoolPosts()->latest()->get();
+    $posts = auth()->user()->usersCoolPosts()->orderByDesc('isTrending')->latest()->get();
     return view('dashboard', ['posts' => $posts]);
 })->middleware('auth');
 
