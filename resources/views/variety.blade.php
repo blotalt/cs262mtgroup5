@@ -156,6 +156,23 @@
                 </div>
             </div>
         @endforeach
+        <div class="d-flex justify-content-center mx-auto w-100 mt-5">
+            <nav aria-label="Rice varieties pagination">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link bg-success border-success" href="#">1 <span class="visually-hidden">(current)</span></a>
+                    </li>
+                    <li class="page-item"><a class="page-link text-success" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link text-success" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link text-success" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </main>
 @endsection
