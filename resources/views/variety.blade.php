@@ -1,4 +1,5 @@
 @php
+
     $varieties = [
         [
             'name' => 'Phka Rumduol', 
@@ -47,8 +48,54 @@
             'location' => 'Preah Vihear, Kampong Speu', 
             'desc' => "Unpolished rice that retains the bran layer, resulting in a tan color and chewier texture. Nutty and earthy with a firmer bite.",
             'type' => 'Brown Rice', 'demand' => 'High', 'yield' => '2.8 t/ha', 'cycle' => '148 days', 'season' => 'All'
+        ],
+        [
+            'name' => 'Phka Rumdeng', 
+            'khmer' => 'ផ្ការំដេង',
+            'img' => 'redrice.png', 
+            'location' => 'Takeo, Battambang, Siem Reap', 
+            'desc' => "A whole-grain red rice with a reddish-brown hue, due to its outer bran layer, which remains intact.",
+            'type' => 'Whole-grain', 'demand' => 'High', 'yield' => '3.2 t/ha', 'cycle' => '155 days', 'season' => 'Dry'
+        ],
+        [
+            'name' => 'Angkor Damnaeb', 
+            'khmer' => 'អង្ករដំណើប', 
+            'img' => 'glutinous.png',
+            'location' => 'Battambang, Pursat', 
+            'desc' => "When cooked, it is called បាយដំណើប (bai damnaeb). It is a cornerstone of Cambodian cuisine and is used in a wide variety of daily staples and festive desserts",
+            'type' => 'Glutinous', 'demand' => 'High', 'yield' => '5.5 t/ha', 'cycle' => '122 days', 'season' => 'Wet'
+        ],
+        [
+            'name' => 'Angkor Samroub', 
+            'khmer' => 'អង្ករសម្រូប', 
+            'img' => 'brown.png',
+            'location' => 'Preah Vihear, Kampong Speu', 
+            'desc' => "Unpolished rice that retains the bran layer, resulting in a tan color and chewier texture. Nutty and earthy with a firmer bite.",
+            'type' => 'Brown Rice', 'demand' => 'High', 'yield' => '2.8 t/ha', 'cycle' => '148 days', 'season' => 'All'
+        ],
+        [
+            'name' => 'Angkor Samroub', 
+            'khmer' => 'អង្ករសម្រូប', 
+            'img' => 'brown.png',
+            'location' => 'Preah Vihear, Kampong Speu', 
+            'desc' => "Unpolished rice that retains the bran layer, resulting in a tan color and chewier texture. Nutty and earthy with a firmer bite.",
+            'type' => 'Brown Rice', 'demand' => 'High', 'yield' => '2.8 t/ha', 'cycle' => '148 days', 'season' => 'All'
         ]
-    ];
+    ]; 
+
+    // 2. Set how many rice types to show per page
+    $perPage = 9;
+
+    // 3. Get current page from URL (?page=1), default to 1
+    $currentPage = (int) request()->get('page', 1);
+    
+    // 4. Calculate total number of pages needed dynamically
+    $totalItems = count($varieties);
+    $totalPages = ceil($totalItems / $perPage);
+    
+    // 5. Slice the array to get only the 9 items for the current page
+    $offset = ($currentPage - 1) * $perPage;
+    $paginatedVarieties = array_slice($varieties, $offset, $perPage);
 @endphp
 
 @extends('layout')
@@ -120,7 +167,7 @@
     </div>
     <main class="container mb-5">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        @foreach($varieties as $rice)
+        @foreach($paginatedVarieties as $rice)
             <div class="col">
                 <div class="card h-100 rice-card border-0 shadow-sm rounded-4 overflow-hidden">
                     <!-- Image Wrapper -->
@@ -156,6 +203,25 @@
                 </div>
             </div>
         @endforeach
+        <div class="d-flex justify-content-center mx-auto w-100 mt-5">
+            <nav aria-label="Rice varieties pagination">
+                <ul class="pagination">
+                    <li class="page-item {{ $currentPage <= 1 ? 'disabled' : '' }}">
+                        <a class="page-link text-success" href="/variety?page={{ $currentPage - 1 }}">Previous</a>
+                    </li>
+
+                    @for ($i = 1; $i <= $totalPages; $i++)
+                    <li class="page-item {{ $currentPage == $i ? 'active' : '' }}">
+                        <a class="page-link {{ $currentPage == $i ? 'bg-success border-success text-white' : 'text-success' }}" href="/variety?page={{ $i }}">{{ $i }}</a>
+                    </li>
+                    @endfor
+
+                    <li class="page-item {{ $currentPage >= $totalPages ? 'disabled' : '' }}">
+                        <a class="page-link text-success" href="/variety?page={{ $currentPage + 1 }}">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </main>
 @endsection
