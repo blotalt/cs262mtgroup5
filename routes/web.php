@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
  Route::get('/', function () {
@@ -51,3 +53,10 @@ Route::post('/create-post', [PostController::class, 'createPost']);
 Route::get('/edit-post/{post}', [PostController::class, 'showEditScreen']);
 Route::put('/edit-post/{post}', [PostController::class, 'updatePost']);
 Route::delete('/delete-post/{post}', [PostController::class, 'deletePost']);
+
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
+
+Route::post('/news/{id}/comments', [CommentController::class, 'store'])
+    ->name('comments.store');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])
+    ->name('comments.destroy');
