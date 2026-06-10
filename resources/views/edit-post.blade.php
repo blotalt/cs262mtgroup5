@@ -1,46 +1,61 @@
 @extends('layout')
 
 @section('content')
-
 <div class="container py-5">
-    <div class="rice-card p-4">
-        <span class="section-label">Edit Update</span>
-        <h1 class="fw-bold mb-4">Edit Post</h1>
+    <h1 class="mb-4">Edit Post</h1>
 
-        <form action="{{ url('/edit-post/'.$post->id) }}" method="POST">
-            @csrf
-            @method('PUT')
+    <form action="{{ url('/edit-post/'.$post->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
 
-            <input
-                type="text"
-                name="title"
-                value="{{ $post->title }}"
-                class="form-control mb-3"
-                placeholder="Post title"
-            >
+        <input
+            class="form-control mb-3"
+            type="text"
+            name="title"
+            value="{{ $post->title }}"
+        >
 
-            <textarea
-                name="body"
-                rows="6"
-                class="form-control mb-3"
-                placeholder="Write market news..."
-            >{{ $post->body }}</textarea>
+        <textarea
+            class="form-control mb-3"
+            name="body"
+            rows="6"
+        >{{ $post->body }}</textarea>
 
-            <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-gold">
-                    Save Changes
-                </button>
-
-                <a href="/dashboard" class="btn btn-outline-secondary">
-                    Cancel
-                </a>
-
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                    Delete Post
-                </button>
+        {{-- Show current image if one exists --}}
+        @if($post->image)
+            <div class="mb-2">
+                <small class="text-muted">Current image:</small><br>
+                <img src="{{ asset('storage/'.$post->image) }}"
+                     class="img-fluid rounded mb-2"
+                     style="max-height: 150px;">
             </div>
-        </form>
-    </div>
+        @endif
+
+        <input
+            class="form-control mb-3"
+            type="file"
+            name="image"
+            accept="image/*"
+        >
+
+        
+        <div class="form-check mb-3">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                name="isTrending"
+                value="1"
+                id="editTrending"
+                {{ $post->isTrending ? 'checked' : '' }}
+            >
+            <label class="form-check-label" for="editTrending">
+                🔥 Mark as Trending
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="/dashboard" class="btn btn-secondary">Cancel</a>
+    </form>
 </div>
 
 <div class="modal fade" id="deleteModal" tabindex="-1">
