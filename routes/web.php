@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\VarietyController;
 use Illuminate\Support\Facades\Route;
 
  Route::get('/', function () {
@@ -19,13 +20,11 @@ Route::get('/pricemarket', function () {
     return view('pricemarket');
 });
 
-Route::get('/variety', function () {
-    return view('variety');
-});
 
 Route::get('/signup', function () {
     return view('signup');
 });
+
 
 Route::get('/login', function () {
     return view('login');
@@ -60,3 +59,11 @@ Route::post('/news/{id}/comments', [CommentController::class, 'store'])
     ->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])
     ->name('comments.destroy');
+
+Route::get('/variety', [VarietyController::class, 'index']);
+Route::get('/manage-varieties', [VarietyController::class, 'manageScreen'])->middleware('auth');
+
+Route::post('/create-variety', [VarietyController::class, 'createVariety'])->middleware('auth');
+Route::get('/edit-variety/{variety}', [VarietyController::class, 'showEditScreen'])->middleware('auth');
+Route::put('/edit-variety/{variety}', [VarietyController::class, 'updateVariety'])->middleware('auth');
+Route::delete('/delete-variety/{variety}', [VarietyController::class, 'deleteVariety'])->middleware('auth');
