@@ -54,9 +54,16 @@
                             By {{ $post->user->name }} · {{ $post->created_at->format('M d, Y') }}
                         </p>
 
-                        <p class="text-muted mb-0">
+                        <p class="text-muted mb-3">
                             {{ $post->body }}
                         </p>
+
+                        <!-- I ADDED THIS FOR THE BUTTON VIEW -->
+                        <a href="{{ route('news.show', $post->id) }}" 
+   class="btn btn-success btn-sm rounded-pill px-3 mt-2">
+    View Details
+</a>
+
                     </article>
                 </div>
             @empty
