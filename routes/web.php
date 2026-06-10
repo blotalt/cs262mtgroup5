@@ -23,9 +23,14 @@ Route::get('/variety', function () {
     return view('variety');
 });
 
+Route::get('/manage-varieties', function () {
+    return view('manage-varieties');
+});
+
 Route::get('/signup', function () {
     return view('signup');
 });
+
 
 Route::get('/login', function () {
     return view('login');
@@ -36,7 +41,7 @@ Route::get('/dashboard', function () {
 });
 
 Route::get('/dashboard', function () {
-    $posts = auth()->user()->usersCoolPosts()->latest()->get();
+    $posts = auth()->user()->usersCoolPosts()->orderByDesc('isTrending')->latest()->get();
     return view('dashboard', ['posts' => $posts]);
 })->middleware('auth');
 

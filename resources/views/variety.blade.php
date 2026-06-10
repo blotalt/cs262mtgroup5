@@ -165,7 +165,7 @@
             </div>
         </div>
     </div>
-    <main class="container mb-5">
+    <div class="container mb-5">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         @foreach($paginatedVarieties as $rice)
             <div class="col">
@@ -223,5 +223,5 @@
             </nav>
         </div>
     </div>
-</main>
+</div>
 @endsection

@@ -37,6 +37,18 @@
                         </span>
 
                         <h4 class="fw-bold mb-2">{{ $post->title }}</h4>
+                        
+
+            @if($post->isTrending)
+            <span class="badge bg-danger mb-2">🔥 Trending</span>
+            @endif
+
+                          @if($post->image)
+                <img src="{{ asset('storage/'.$post->image) }}"
+                     class="img-fluid rounded mb-3"
+                     alt="{{ $post->title }}"
+                     style="height: 180px; width: 100%; object-fit: cover;">
+                @endif
 
                         <p class="text-muted small mb-3">
                             By {{ $post->user->name }} · {{ $post->created_at->format('M d, Y') }}
