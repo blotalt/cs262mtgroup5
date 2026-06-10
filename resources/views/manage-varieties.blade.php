@@ -5,32 +5,10 @@
     <div class="container mt-0">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <span class="text-warning fw-bold small" style="font-size: 0.8rem;">
-                    LIVE DATA • UPDATED TODAY
-                </span>
-                <h1 class="display-5 fw-bold mt-1 mb-2">Rice Varieties</h1>
-                <p class="text-white-50 lead fs-6">
-                    Manage Cambodia's diverse rice varieties and market demand
-                </p>
-            </div>
-
-            <div class="col-lg-4 d-flex justify-content-lg-end mt-4 mt-lg-0">
-                <div class="d-flex align-items-center bg-white bg-opacity-10 rounded p-3 text-center px-4">
-                    <div class="px-3 stat-divider">
-                        <h3 class="fw-bold text-warning m-0">6</h3>
-                        <small class="text-white-50" style="font-size: 0.75rem;">Total Varieties</small>
-                    </div>
-
-                    <div class="px-3 stat-divider">
-                        <h3 class="fw-bold text-warning m-0">3</h3>
-                        <small class="text-white-50" style="font-size: 0.75rem;">High Demand</small>
-                    </div>
-
-                    <div class="px-3 ms-2">
-                        <h3 class="fw-bold text-warning m-0">25</h3>
-                        <small class="text-white-50" style="font-size: 0.75rem;">Provinces</small>
-                    </div>
-                </div>
+                <span class="text-warning fw-bold small" style="font-size: 0.8rem;">SECURE ADMINISTRATION PORTAL</span>
+                <h1 class="display-5 fw-bold mt-1 mb-2">Manage Varieties</h1>
+                <p class="text-white-50 lead fs-6">Create entries and control existing structural cards in real-time.</p>
+                <a href="/variety" class="btn btn-outline-light btn-sm px-3 rounded-pill mt-2">← Back to Catalog</a>
             </div>
         </div>
     </div>
@@ -38,283 +16,136 @@
 @endsection
 
 @section('content')
-
-{{--
-OLD HARD-CODED VARIETY PAGE CODE WAS HERE
-
-The previous version used:
-- @php $varieties = [...]
-- $paginatedVarieties
-- @foreach($paginatedVarieties as $rice)
-- hard-coded card display
-- pagination buttons
-
-It was removed from display so the new CRUD-style interface can show.
---}}
-
 <section class="py-5">
     <div class="container">
         <div class="row g-4">
 
-            <!-- Create Variety Form -->
             <div class="col-lg-5">
-                <div class="rice-card p-4">
-                    <span class="section-label">Create Variety</span>
+                <div class="rice-card p-4 shadow-sm bg-white rounded-4">
+                    <span class="section-label bg-gold-subtle text-gold px-2 py-1 rounded small fw-bold mb-2 d-inline-block">DATABASE CREATE</span>
                     <h2 class="fw-bold mb-3">New Rice Variety</h2>
 
-                    <form action="#" method="POST" enctype="multipart/form-data">
+                    <form action="/create-variety" method="POST" enctype="multipart/form-data">
                         @csrf
 
-                        <input
-                            type="text"
-                            class="form-control mb-3"
-                            name="name"
-                            placeholder="Rice name"
-                        >
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Variety Standard Name</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
 
-                        <input
-                            type="text"
-                            class="form-control mb-3"
-                            name="khmer_name"
-                            placeholder="Khmer name"
-                        >
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Khmer Name</label>
+                            <input type="text" class="form-control" name="khmer_name" required>
+                        </div>
 
-                        <select class="form-select mb-3" name="type">
-                            <option selected disabled>Select rice type</option>
-                            <option>Jasmine</option>
-                            <option>Black Rice</option>
-                            <option>Whole-grain</option>
-                            <option>Glutinous</option>
-                            <option>Brown Rice</option>
-                        </select>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Classification Category</label>
+                            <select class="form-select" name="type" required>
+                                <option selected disabled value="">Select rice type</option>
+                                <option value="Jasmine">Jasmine</option>
+                                <option value="Black Rice">Black Rice</option>
+                                <option value="Whole-grain">Whole-grain</option>
+                                <option value="Glutinous">Glutinous</option>
+                                <option value="Brown Rice">Brown Rice</option>
+                            </select>
+                        </div>
 
-                        <input
-                            type="text"
-                            class="form-control mb-3"
-                            name="location"
-                            placeholder="Province / Location"
-                        >
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Grow Regions / Provinces</label>
+                            <input type="text" class="form-control" name="location" required>
+                        </div>
 
-                        <textarea
-                            class="form-control mb-3"
-                            name="description"
-                            rows="4"
-                            placeholder="Description"
-                        ></textarea>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Aromatic/Structural Description</label>
+                            <textarea class="form-control" name="description" rows="3"></textarea>
+                        </div>
 
-                        <div class="row g-2">
+                        <div class="row g-2 mb-3">
                             <div class="col-md-4">
-                                <input
-                                    type="text"
-                                    class="form-control mb-3"
-                                    name="yield"
-                                    placeholder="Yield"
-                                >
+                                <label class="form-label small fw-bold text-muted">Avg Yield</label>
+                                <input type="text" class="form-control" name="yield" required>
                             </div>
-
                             <div class="col-md-4">
-                                <input
-                                    type="text"
-                                    class="form-control mb-3"
-                                    name="cycle"
-                                    placeholder="Cycle"
-                                >
+                                <label class="form-label small fw-bold text-muted">Life Cycle</label>
+                                <input type="text" class="form-control" name="cycle" required>
                             </div>
-
                             <div class="col-md-4">
-                                <input
-                                    type="text"
-                                    class="form-control mb-3"
-                                    name="season"
-                                    placeholder="Season"
-                                >
+                                <label class="form-label small fw-bold text-muted">Season</label>
+                                <input type="text" class="form-control" name="season" required>
                             </div>
                         </div>
 
-                        <select class="form-select mb-3" name="demand">
-                            <option selected disabled>Select demand</option>
-                            <option>Very High</option>
-                            <option>High</option>
-                            <option>Medium</option>
-                            <option>Low</option>
-                        </select>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Market Export Demand</label>
+                            <select class="form-select" name="demand" required>
+                                <option selected disabled value="">Select demand rank</option>
+                                <option value="Very High">Very High</option>
+                                <option value="High">High</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
 
-                        <input
-                            type="file"
-                            class="form-control mb-3"
-                            name="image"
-                        >
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold text-muted">Display Cover Media</label>
+                            <input type="file" class="form-control" name="image" accept="image/*" required>
+                        </div>
 
-                        <button type="submit" class="btn btn-gold">
-                            Add Variety
+                        <button type="submit" class="btn btn-gold w-100 fw-bold shadow-sm py-2">
+                            Post!
                         </button>
                     </form>
                 </div>
             </div>
 
-            <!-- Existing Varieties CRUD Display -->
             <div class="col-lg-7">
                 <div class="mb-4">
-                    <h2 class="fw-bold mb-1">Existing Varieties</h2>
-                    <p class="text-muted mb-0">
-                        Preview and manage rice variety cards.
-                    </p>
+                    <h2 class="fw-bold mb-1">Your Registered Entries</h2>
+                    <p class="text-muted mb-0">Review and modify cards you have uploaded to the system registry.</p>
                 </div>
 
-                <div class="rice-card p-3 mb-3">
-                    <div class="row g-3 align-items-center">
-                        <div class="col-md-4">
-                            <img
-                                src="{{ asset('images/ricetypes/jasmine.png') }}"
-                                class="img-fluid rounded"
-                                alt="Phka Rumduol"
-                            >
-                        </div>
+                @forelse($myVarieties as $item)
+                    <div class="rice-card p-3 mb-3 border bg-white rounded-4 shadow-sm">
+                        <div class="row g-3 align-items-center">
+                            <div class="col-md-4">
+                                <img src="{{ asset('storage/' . $item->image) }}" class="img-fluid rounded-3" alt="Image" style="height: 120px; width: 100%; object-fit: cover;">
+                            </div>
 
-                        <div class="col-md-8">
-                            <div class="d-flex justify-content-between gap-3">
-                                <div>
-                                    <span class="badge bg-success mb-2">Jasmine</span>
-
-                                    <h4 class="fw-bold mb-1">
-                                        Phka Rumduol
-                                    </h4>
-
-                                    <p class="text-muted small mb-2">
-                                        ផ្ការំដួល • Takeo, Kampong Speu
-                                    </p>
-
-                                    <p class="text-muted mb-3">
-                                        Cambodia's most prized aromatic variety, awarded World's Best Rice multiple times.
-                                    </p>
-
-                                    <div class="d-flex flex-wrap gap-3 small fw-semibold">
-                                        <span>3.2 t/ha Yield</span>
-                                        <span>155 days Cycle</span>
-                                        <span>Wet Season</span>
+                            <div class="col-md-8">
+                                <div class="d-flex justify-content-between align-items-start gap-2">
+                                    <div>
+                                        <span class="badge bg-success mb-1">{{ $item->type }}</span>
+                                        <h4 class="fw-bold mb-0 text-dark">{{ $item->name }}</h4>
+                                        <p class="text-muted small mb-2">{{ $item->khmer_name }} • {{ $item->location }}</p>
+                                        <div class="d-flex gap-3 text-muted" style="font-size: 0.8rem;">
+                                            <span>🌾 {{ $item->yield }}</span>
+                                            <span>⏱️ {{ $item->cycle }}</span>
+                                            <span>☀️ {{ $item->season }}</span>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="d-flex flex-column gap-2">
-                                    <a href="#" class="btn btn-warning btn-sm">
-                                        Edit
-                                    </a>
-
-                                    <button type="button" class="btn btn-outline-danger btn-sm">
-                                        Delete
-                                    </button>
+                                    <div class="d-flex flex-column gap-2">
+                                        <a href="/edit-variety/{{ $item->id }}" class="btn btn-warning btn-sm fw-bold">Edit</a>
+                                        
+                                        <form action="/delete-variety/{{ $item->id }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this variety permanently?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-outline-danger btn-sm w-100">Delete</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="rice-card p-3 mb-3">
-                    <div class="row g-3 align-items-center">
-                        <div class="col-md-4">
-                            <img
-                                src="{{ asset('images/ricetypes/blackrice.jpg') }}"
-                                class="img-fluid rounded"
-                                alt="Neab Dam"
-                            >
-                        </div>
-
-                        <div class="col-md-8">
-                            <div class="d-flex justify-content-between gap-3">
-                                <div>
-                                    <span class="badge bg-dark mb-2">Black Rice</span>
-
-                                    <h4 class="fw-bold mb-1">
-                                        Neab Dam
-                                    </h4>
-
-                                    <p class="text-muted small mb-2">
-                                        នាងដំ • Kampong Thom
-                                    </p>
-
-                                    <p class="text-muted mb-3">
-                                        Traditional Cambodian black rice with deep purple bran layer.
-                                    </p>
-
-                                    <div class="d-flex flex-wrap gap-3 small fw-semibold">
-                                        <span>2.8 t/ha Yield</span>
-                                        <span>148 days Cycle</span>
-                                        <span>Dry Season</span>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex flex-column gap-2">
-                                    <a href="#" class="btn btn-warning btn-sm">
-                                        Edit
-                                    </a>
-
-                                    <button type="button" class="btn btn-outline-danger btn-sm">
-                                        Delete
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                @empty
+                    <div class="rice-card p-5 text-center bg-light border-dashed rounded-4">
+                        <h4 class="fw-bold text-muted mb-1">Workspace Portfolio Empty</h4>
+                        <p class="text-muted small mb-0">Use the creation panel on the left to add entries under your account session.</p>
                     </div>
-                </div>
-
-                <div class="rice-card p-3 mb-3">
-                    <div class="row g-3 align-items-center">
-                        <div class="col-md-4">
-                            <img
-                                src="{{ asset('images/ricetypes/redrice.png') }}"
-                                class="img-fluid rounded"
-                                alt="Phka Rumdeng"
-                            >
-                        </div>
-
-                        <div class="col-md-8">
-                            <div class="d-flex justify-content-between gap-3">
-                                <div>
-                                    <span class="badge bg-danger mb-2">Whole-grain</span>
-
-                                    <h4 class="fw-bold mb-1">
-                                        Phka Rumdeng
-                                    </h4>
-
-                                    <p class="text-muted small mb-2">
-                                        ផ្ការំដេង • Takeo, Battambang, Siem Reap
-                                    </p>
-
-                                    <p class="text-muted mb-3">
-                                        Whole-grain red rice with a reddish-brown hue from the outer bran layer.
-                                    </p>
-
-                                    <div class="d-flex flex-wrap gap-3 small fw-semibold">
-                                        <span>3.2 t/ha Yield</span>
-                                        <span>155 days Cycle</span>
-                                        <span>Dry Season</span>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex flex-column gap-2">
-                                    <a href="#" class="btn btn-warning btn-sm">
-                                        Edit
-                                    </a>
-
-                                    <button type="button" class="btn btn-outline-danger btn-sm">
-                                        Delete
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="rice-card p-5 text-center">
-                    <h4 class="fw-bold">Backend Ready</h4>
-                    <p class="text-muted mb-0">
-                        Backend can later connect this form and replace the sample cards with database records.
-                    </p>
-                </div>
+                @endforelse
             </div>
 
         </div>
     </div>
 </section>
-
 @endsection
