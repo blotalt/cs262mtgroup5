@@ -34,66 +34,26 @@
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>
-                            <div class="rice-name">Phka Rumduol</div>
-                            <div class="rice-type">Jasmine Rice</div>
-                        </td>
-                        <td>Takeo</td>
-                        <td>Provincial Market</td>
-                        <td class="price-value">$1.40</td>
-                        <td class="price-up">+2.1%</td>
-                        <td>Today</td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="rice-name">Neab Dam</div>
-                            <div class="rice-type">Black Rice</div>
-                        </td>
-                        <td>Kampong Thom</td>
-                        <td>Central Market</td>
-                        <td class="price-value">$1.25</td>
-                        <td class="price-up">+0.8%</td>
-                        <td>Today</td>
-                    </tr>
-                    
-                    <tr>
-                        <td>
-                            <div class="rice-name">Phka Rumdeng</div>
-                            <div class="rice-type">Red Rice</div>
-                        </td>
-                        <td>Siem Reap</td>
-                        <td>Local Market</td>
-                        <td class="price-value">$1.10</td>
-                        <td class="price-down">-0.5%</td>
-                        <td>Today</td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="rice-name">Angkor Damnaeb</div>
-                            <div class="rice-type">Glutinous Rice</div>
-                        </td>
-                        <td>Prey Veng</td>
-                        <td>Provincial Market</td>
-                        <td class="price-value">$1.18</td>
-                        <td class="price-up">+1.2%</td>
-                        <td>Today</td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="rice-name">Angkor Samroub</div>
-                            <div class="rice-type">Brown Rice</div>
-                        </td>
-                        <td>Mondulkiri</td>
-                        <td>Farm Market</td>
-                        <td class="price-value">$1.32</td>
-                        <td class="price-up">+0.4%</td>
-                        <td>Today</td>
-                    </tr>
-                </tbody>
+@forelse($prices as $price)
+    <tr>
+        <td>
+            <div class="rice-name">{{ $price->rice_variety }}</div>
+            <div class="rice-type">{{ $price->rice_type }}</div>
+        </td>
+        <td>{{ $price->province }}</td>
+        <td>{{ $price->market }}</td>
+        <td class="price-value">${{ $price->price_per_kg }}</td>
+        <td class="{{ $price->change_percent >= 0 ? 'price-up' : 'price-down' }}">
+            {{ $price->change_percent >= 0 ? '+' : '' }}{{ $price->change_percent }}%
+        </td>
+        <td>Today</td>
+    </tr>
+@empty
+    <tr>
+        <td colspan="6" class="text-center">No prices available yet.</td>
+    </tr>
+@endforelse
+</tbody>
             </table>
         </div>
     </div>
