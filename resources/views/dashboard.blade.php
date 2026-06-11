@@ -26,7 +26,7 @@
                         <span class="section-label">Create Update</span>
                         <h2 class="fw-bold mb-3">New Post</h2>
 
-                        <form action="{{ url('/create-post') }}" method="POST">
+                        <form action="{{ url('/create-post') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <input
@@ -42,6 +42,25 @@
                                 rows="6"
                                 placeholder="Write market news..."
                             ></textarea>
+
+                             <input
+                             class="form-control mb-3"
+                             type="file"
+                             name="image"
+                             accept="image/*">
+                             <div class = "form-check mb-3">
+                                <input
+                                    class="form-check-input"
+                                    type = "checkbox"
+                                    name = "isTrending"
+                                    value = "1"
+                                    id = "trendingCheck"
+                                    >
+                                    <label class = "form-check-label" for="trendingCheck">
+                                        Mark as Trending
+                                    </label>
+
+                             </div>
 
                             <button type="submit" class="btn btn-gold">
                                 Create Post
@@ -63,6 +82,15 @@
                             <div class="d-flex justify-content-between align-items-start gap-3">
                                 <div>
                                     <h4 class="fw-bold mb-1">{{ $post->title }}</h4>
+                                    @if($post->isTrending)
+    <span class="badge bg-danger mb-2">🔥 Trending</span>
+@endif
+                                           @if($post->image)
+                    <img src="{{ asset('storage/'.$post->image) }}"
+                         class="img-fluid rounded mb-3"
+                         alt="{{ $post->title }}"
+                         style="max-height: 200px; object-fit: cover;">
+                    @endif
 
                                     <p class="text-muted small mb-3">
                                         By {{ $post->user->name }}

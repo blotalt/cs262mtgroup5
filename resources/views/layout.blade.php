@@ -125,6 +125,11 @@
         font-size: 0.9rem;
     }
 
+    .navbar {
+    position: relative;
+    z-index: 99999 !important;
+}
+
     /* Cards Setup */
     .rice-card {
         border: none;
@@ -356,6 +361,25 @@
     .khmer-footer hr {
         border-color: rgba(255, 255, 255, 0.2);
     }
+
+    .social-icons {
+    display: flex;
+    align-items: center;
+}
+
+    .social-icon {
+    color: var(--accent-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease;
+    text-decoration: none;
+}
+
+    .social-icon:hover {
+    color: #fff;
+    transform: translateY(-2px);
+}
     </style>
 </head>
 
