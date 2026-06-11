@@ -21,8 +21,8 @@
         <p class="text-muted mb-4">Updated daily from 25 provincial markets</p>
 
         <div class="price-table-wrapper rounded-3 shadow-sm overflow-hidden">
-            <table class="table table-hover price-table mb-0">
-                <thead>
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-success">
                     <tr>
                         <th>Rice Variety</th>
                         <th>Province</th>

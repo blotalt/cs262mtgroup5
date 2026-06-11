@@ -18,9 +18,11 @@
                 <h6 class="text-warning text-uppercase fw-bold mb-3">Navigation</h6>
                 <ul class="list-unstyled text-white-50">
                     <li class="mb-2"><a class="list-unstyled text-white-50" href="/home">Home</a></li>
-                    <li class="mb-2"><a class="list-unstyled text-white-50" href="/pricemarket">Market Prices</a></li>
                     <li class="mb-2"><a class="list-unstyled text-white-50" href="/variety">Varieties</a></li>
+                    <li class="mb-2"><a class="list-unstyled text-white-50" href="/pricemarket">Prices</a></li>
+                    <li class="mb-2"><a class="list-unstyled text-white-50" href="/news">News</a></li>
                     <li class="mb-2"><a class="list-unstyled text-white-50" href="/about">About</a></li>
+                    <li class="mb-2"><a class="list-unstyled text-white-50" href="/dashboard">Dashboard</a></li>
                 </ul>
             </div>
 

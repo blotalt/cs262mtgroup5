@@ -1,7 +1,6 @@
 <header class="bg-header-green text-white pb-5">
     <nav class="navbar navbar-expand-lg navbar-dark bg-header-green pt-3">
         <div class="container">
-
             <!-- Logo -->
             <a class="navbar-brand d-flex align-items-center" href="/home">
                 <div class="bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center me-2"
@@ -40,37 +39,37 @@
    aria-expanded="false">
     Varieties
 </a>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu bg-header-green border-white p-0 overflow-hidden shadow-sm">
         <li>
-            <a class="dropdown-item" href="/variety">View Varieties</a>
+            <a class="dropdown-item bg-header-green text-white" href="/variety">View Varieties</a>
         </li>
         <li>
-            <a class="dropdown-item" href="/manage-varieties">Manage Varieties</a>
+            <a class="dropdown-item bg-header-green text-white" href="/manage-varieties">Manage Varieties</a>
         </li>
     </ul>
 </li>
 
-                                    <li class="nav-item dropdown">
+                            <li class="nav-item dropdown">
                         <a class="nav-link nav-link-custom dropdown-toggle {{ request()->is('pricemarket') ? 'active' : '' }}"
                         href="#" role="button" data-bs-toggle="dropdown">
-                            Market 
+                            Prices
                         </a>
 
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu bg-header-green border-white p-0 overflow-hidden">
                             <li>
-                                <a class="dropdown-item" href="{{ route('pricemarket') }}">
+                                <a class="dropdown-item bg-header-green text-white" href="{{ route('pricemarket') }}">
                                     View Market Prices
                                 </a>
                             </li>
 
                             <li>
-                                <a class="dropdown-item" href="{{ route('admin.market-prices.index') }}">
+                                <a class="dropdown-item bg-header-green text-white" href="{{ route('admin.market-prices.index') }}">
                                     Manage Prices
                                 </a>
                             </li>
 
                             <li>
-                                <a class="dropdown-item" href="{{ route('admin.market-prices.create') }}">
+                                <a class="dropdown-item bg-header-green text-white" href="{{ route('admin.market-prices.create') }}">
                                     Add New Price
                                 </a>
                             </li>

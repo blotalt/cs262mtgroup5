@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\VarietyController;
 use App\Http\Controllers\MarketPriceController;
 use App\Http\Controllers\SearchController;
@@ -121,6 +122,11 @@ Route::post('/news/{id}/comments', [CommentController::class, 'store'])
     ->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])
     ->name('comments.destroy');
+Route::put('/comments/{comment}', [CommentController::class, 'update'])
+    ->name('comments.update');
+
+Route::post('/news/{id}/rating', [RatingController::class, 'store'])
+    ->name('ratings.store');
 
 Route::get('/variety', [VarietyController::class, 'index']);
 Route::get('/manage-varieties', [VarietyController::class, 'manageScreen'])->middleware('auth');
