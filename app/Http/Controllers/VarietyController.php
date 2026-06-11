@@ -8,19 +8,61 @@ use Illuminate\Support\Facades\Storage;
 
 class VarietyController extends Controller
 {
-    public function index()
-    {
-        $paginatedVarieties = Variety::latest()->paginate(10);
+    // public function index()
+    // {
+    //     $paginatedVarieties = Variety::latest()->paginate(10);
         
-        $totalCount = Variety::count(); 
-        $highDemandCount = Variety::where('demand', 'Very High')->orWhere('demand', 'High')->count();
+    //     $totalCount = Variety::count(); 
+    //     $highDemandCount = Variety::where('demand', 'Very High')->orWhere('demand', 'High')->count();
 
-        return view('variety', [
-            'varieties' => $paginatedVarieties,
-            'totalCount' => $totalCount,
-            'highDemandCount' => $highDemandCount
-        ]);
+    //     return view('variety', [
+    //         'varieties' => $paginatedVarieties,
+    //         'totalCount' => $totalCount,
+    //         'highDemandCount' => $highDemandCount
+    //     ]);
+    // }
+
+
+public function index(Request $request)
+{
+    $query = Variety::query();
+
+    // Type filter (pills)
+    if ($request->filled('type')) {
+        $query->where('type', $request->type);
     }
+
+    // Search (name, Khmer name, location)
+    if ($request->filled('search')) {
+        $search = $request->search;
+        $query->where(function ($q) use ($search) {
+            $q->where('name', 'like', "%{$search}%")
+              ->orWhere('khmer_name', 'like', "%{$search}%")
+              ->orWhere('location', 'like', "%{$search}%");
+        });
+    }
+
+    // Sort
+    if ($request->sort === 'az') {
+        $query->orderBy('name', 'asc');
+    } elseif ($request->sort === 'za') {
+        $query->orderBy('name', 'desc');
+    } else {
+        $query->latest();
+    }
+
+    $varieties = $query->paginate(9)->withQueryString();
+    $allNames = Variety::orderBy('name')->pluck('name'); 
+
+    $totalCount = Variety::count();
+    $highDemandCount = Variety::whereIn('demand', ['Very High', 'High'])->count();
+
+    return view('variety', [
+        'varieties' => $varieties,
+        'totalCount' => $totalCount,
+        'highDemandCount' => $highDemandCount
+    ]);
+}
 
     public function manageScreen()
     {
