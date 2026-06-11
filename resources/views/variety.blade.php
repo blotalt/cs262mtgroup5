@@ -80,20 +80,40 @@
             'location' => 'Preah Vihear, Kampong Speu', 
             'desc' => "Unpolished rice that retains the bran layer, resulting in a tan color and chewier texture. Nutty and earthy with a firmer bite.",
             'type' => 'Brown Rice', 'demand' => 'High', 'yield' => '2.8 t/ha', 'cycle' => '148 days', 'season' => 'All'
+        ],
+        [
+            'name' => 'Angkor Damnaeb', 
+            'khmer' => 'អង្ករដំណើប', 
+            'img' => 'glutinous.png',
+            'location' => 'Battambang, Pursat', 
+            'desc' => "When cooked, it is called បាយដំណើប (bai damnaeb). It is a cornerstone of Cambodian cuisine and is used in a wide variety of daily staples and festive desserts",
+            'type' => 'Glutinous', 'demand' => 'High', 'yield' => '5.5 t/ha', 'cycle' => '122 days', 'season' => 'Wet'
+        ],
+        [
+            'name' => 'Angkor Samroub', 
+            'khmer' => 'អង្ករសម្រូប', 
+            'img' => 'brown.png',
+            'location' => 'Preah Vihear, Kampong Speu', 
+            'desc' => "Unpolished rice that retains the bran layer, resulting in a tan color and chewier texture. Nutty and earthy with a firmer bite.",
+            'type' => 'Brown Rice', 'demand' => 'High', 'yield' => '2.8 t/ha', 'cycle' => '148 days', 'season' => 'All'
+        ],
+        [
+            'name' => 'Angkor Samroub', 
+            'khmer' => 'អង្ករសម្រូប', 
+            'img' => 'brown.png',
+            'location' => 'Preah Vihear, Kampong Speu', 
+            'desc' => "Unpolished rice that retains the bran layer, resulting in a tan color and chewier texture. Nutty and earthy with a firmer bite.",
+            'type' => 'Brown Rice', 'demand' => 'High', 'yield' => '2.8 t/ha', 'cycle' => '148 days', 'season' => 'All'
         ]
     ]; 
 
-    // 2. Set how many rice types to show per page
     $perPage = 9;
 
-    // 3. Get current page from URL (?page=1), default to 1
     $currentPage = (int) request()->get('page', 1);
     
-    // 4. Calculate total number of pages needed dynamically
     $totalItems = count($varieties);
     $totalPages = ceil($totalItems / $perPage);
     
-    // 5. Slice the array to get only the 9 items for the current page
     $offset = ($currentPage - 1) * $perPage;
     $paginatedVarieties = array_slice($varieties, $offset, $perPage);
 @endphp
@@ -134,11 +154,9 @@
 @endsection
 
 @section('content')
-<!-- Filter & Options Controls Panel -->
     <div class="container my-4">
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
             
-            <!-- Left Side Search Input -->
             <div class="d-flex align-items-center flex-grow-1 flex-md-grow-0" style="min-width: 260px;">
                 <div class="position-relative w-100">
                     <input type="text" class="form-control search-filter-input" placeholder="Search varieties...">
@@ -146,7 +164,6 @@
                 </div>
             </div>
 
-            <!-- Scrollable Filter Chips -->
             <div class="d-flex gap-2 overflow-auto py-1 align-items-center">
                 <button class="pill-filter active">All Types</button>
                 <button class="pill-filter">Jasmine</button>
@@ -157,7 +174,6 @@
                 <button class="pill-filter">Brown Rice</button>
             </div>
 
-            <!-- Sorting Dropdown Tool -->
             <div>
                 <button class="dropdown-sort text-muted d-flex align-items-center gap-2">
                     <span>⚙️</span> Demand: High to Low <span>▼</span>
@@ -170,14 +186,12 @@
         @foreach($paginatedVarieties as $rice)
             <div class="col">
                 <div class="card h-100 rice-card border-0 shadow-sm rounded-4 overflow-hidden">
-                    <!-- Image Wrapper -->
                     <div class="card-img-wrapper position-relative">
                         <img src="{{ asset('images/ricetypes/' . $rice['img']) }}" class="card-img-top" alt="{{ $rice['name'] }}" style="height: 200px; object-fit: cover;">
                         <span class="badge-type position-absolute top-0 start-0 m-3 bg-success">{{ $rice['type'] }}</span>
                     </div>
                     
                     <div class="card-body p-4">
-                        <!-- Header: Name, Khmer, and Demand Badge -->
                         <div class="d-flex justify-content-between align-items-start mb-2">
                             <div>
                                 <h5 class="card-title fw-bold mb-0">{{ $rice['name'] }}</h5>
@@ -189,10 +203,7 @@
                             </div>
                         </div>
                         
-                        <!-- Description -->
                         <p class="card-text text-muted small mb-4">{{ $rice['desc'] }}</p>
-                        
-                        <!-- Footer: Yield, Cycle, Season, Button -->
                         <div class="d-flex justify-content-between align-items-center pt-3 border-top">
                             <div class="text-center"><div class="fw-bold small">{{ $rice['yield'] }}</div><div class="text-muted" style="font-size: 0.7rem;">Yield</div></div>
                             <div class="text-center"><div class="fw-bold small">{{ $rice['cycle'] }}</div><div class="text-muted" style="font-size: 0.7rem;">Cycle</div></div>
