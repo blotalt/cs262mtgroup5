@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\RatingController;
 use Illuminate\Support\Facades\Route;
 
  Route::get('/', function () {
@@ -60,3 +61,8 @@ Route::post('/news/{id}/comments', [CommentController::class, 'store'])
     ->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])
     ->name('comments.destroy');
+Route::put('/comments/{comment}', [CommentController::class, 'update'])
+    ->name('comments.update');
+
+Route::post('/news/{id}/rating', [RatingController::class, 'store'])
+    ->name('ratings.store');
