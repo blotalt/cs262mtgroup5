@@ -6,7 +6,6 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\RatingController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VarietyController;
 use App\Http\Controllers\MarketPriceController;
 // use Illuminate\Support\Facades\Route;
@@ -132,4 +131,3 @@ Route::post('/create-variety', [VarietyController::class, 'createVariety'])->mid
 Route::get('/edit-variety/{variety}', [VarietyController::class, 'showEditScreen'])->middleware('auth');
 Route::put('/edit-variety/{variety}', [VarietyController::class, 'updateVariety'])->middleware('auth');
 Route::delete('/delete-variety/{variety}', [VarietyController::class, 'deleteVariety'])->middleware('auth');
-

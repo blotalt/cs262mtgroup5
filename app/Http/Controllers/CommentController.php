@@ -44,7 +44,7 @@ public function update(Request $request, Comment $comment)
     ]);
 
     $comment->update([
-        'body' => $request->body
+        'body' => trim($request->body)
     ]);
 
     return back();
