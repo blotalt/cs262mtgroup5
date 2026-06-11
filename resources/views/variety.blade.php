@@ -44,20 +44,30 @@
                 </div>
             </div>
 
-            <div class="d-flex gap-2 overflow-auto py-1 align-items-center">
+            {{-- <div class="d-flex gap-2 overflow-auto py-1 align-items-center">
                 <button class="pill-filter active">All Types</button>
                 <button class="pill-filter">Jasmine</button>
                 <button class="pill-filter">Black Rice</button>
                 <button class="pill-filter">Glutinous</button>
                 <button class="pill-filter">Whole-Grain White</button>
                 <button class="pill-filter">Brown Rice</button>
-            </div>
+            </div> --}}
+<div class="d-flex gap-2 overflow-auto py-1 align-items-center">
+    <a href="/variety" class="pill-filter text-decoration-none {{ !request('type') ? 'active' : '' }}">All Types</a>
+    <a href="/variety?type=Jasmine" class="pill-filter text-decoration-none {{ request('type') == 'Jasmine' ? 'active' : '' }}">Jasmine</a>
+    <a href="/variety?type=Black Rice" class="pill-filter text-decoration-none {{ request('type') == 'Black Rice' ? 'active' : '' }}">Black Rice</a>
+    <a href="/variety?type=Glutinous" class="pill-filter text-decoration-none {{ request('type') == 'Glutinous' ? 'active' : '' }}">Glutinous</a>
+    <a href="/variety?type=Whole-Grain White" class="pill-filter text-decoration-none {{ request('type') == 'Whole-Grain White' ? 'active' : '' }}">Whole-Grain White</a>
+    <a href="/variety?type=Brown Rice" class="pill-filter text-decoration-none {{ request('type') == 'Brown Rice' ? 'active' : '' }}">Brown Rice</a>
+</div>
 
-            <div>
-                <button class="dropdown-sort text-muted d-flex align-items-center gap-2">
-                    <span>⚙️</span> Demand: High to Low <span>▼</span>
-                </button>
-            </div>
+
+           <div>
+    <a href="/variety?type={{ request('type') }}&sort={{ request('sort') == 'az' ? 'za' : 'az' }}"
+       class="dropdown-sort text-decoration-none d-flex align-items-center gap-2 {{ request('sort') ? 'active' : '' }}">
+        <span>⚙️</span> Sort: {{ request('sort') == 'za' ? 'Z–A' : 'A–Z' }} <span>▼</span>
+    </a>
+</div>
         </div>
     </div>
 

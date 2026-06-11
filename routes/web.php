@@ -7,6 +7,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\VarietyController;
 use App\Http\Controllers\MarketPriceController;
+use App\Http\Controllers\SearchController;
 // use Illuminate\Support\Facades\Route;
 
 
@@ -50,6 +51,9 @@ Route::post('/login', [UserController::class, 'login'])
 
 Route::post('/logout', [UserController::class, 'logout'])
     ->name('logout');
+
+Route::get('/search', [SearchController::class, 'index']);
+Route::get('/search/suggest', [SearchController::class, 'suggest']);
 
 /*
 |--------------------------------------------------------------------------
