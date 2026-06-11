@@ -6,7 +6,9 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\VarietyController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MarketPriceController;
+// use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +31,8 @@ Route::get('/signup', function () {
     return view('signup');
 })->name('register');
 
+Route::get('/news', [PostController::class, 'news'])->name('news');
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
 
 Route::get('/login', function () {
     return view('login');
@@ -52,11 +56,7 @@ Route::post('/logout', [UserController::class, 'logout'])
 Route::get('/dashboard', function () {
     $posts = auth()->user()->usersCoolPosts()->orderByDesc('isTrending')->latest()->get();
     return view('dashboard', ['posts' => $posts]);
-})->middleware('auth');
-
-    return view('dashboard', compact('posts'));
 })->middleware('auth')->name('dashboard');
-
 /*
 |--------------------------------------------------------------------------
 | Market Price CRUD (Admin)
