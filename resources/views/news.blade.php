@@ -37,14 +37,33 @@
                         </span>
 
                         <h4 class="fw-bold mb-2">{{ $post->title }}</h4>
+                        
+
+            @if($post->isTrending)
+            <span class="badge bg-danger mb-2">🔥 Trending</span>
+            @endif
+
+                          @if($post->image)
+                <img src="{{ asset('storage/'.$post->image) }}"
+                     class="img-fluid rounded mb-3"
+                     alt="{{ $post->title }}"
+                     style="height: 180px; width: 100%; object-fit: cover;">
+                @endif
 
                         <p class="text-muted small mb-3">
                             By {{ $post->user->name }} · {{ $post->created_at->format('M d, Y') }}
                         </p>
 
-                        <p class="text-muted mb-0">
+                        <p class="text-muted mb-3">
                             {{ $post->body }}
                         </p>
+
+                        <!-- I ADDED THIS FOR THE BUTTON VIEW -->
+                        <a href="{{ route('news.show', $post->id) }}" 
+   class="btn btn-success btn-sm rounded-pill px-3 mt-2">
+    View Details
+</a>
+
                     </article>
                 </div>
             @empty

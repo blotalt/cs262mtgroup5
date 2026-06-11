@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\MarketPriceController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\VarietyController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,25 +24,11 @@ Route::get('/home', function () {
 
 Route::get('/pricemarket', [MarketPriceController::class, 'index'])->name('pricemarket');;
 
-Route::get('/variety', function () {
-    return view('variety');
-})->name('variety');
-
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
-
-Route::get('/news', [PostController::class, 'news'])->name('news');
-
-/*
-|--------------------------------------------------------------------------
-| Authentication
-|--------------------------------------------------------------------------
-*/
 
 Route::get('/signup', function () {
     return view('signup');
 })->name('register');
+
 
 Route::get('/login', function () {
     return view('login');
@@ -61,7 +50,9 @@ Route::post('/logout', [UserController::class, 'logout'])
 */
 
 Route::get('/dashboard', function () {
-    $posts = auth()->user()->usersCoolPosts()->latest()->get();
+    $posts = auth()->user()->usersCoolPosts()->orderByDesc('isTrending')->latest()->get();
+    return view('dashboard', ['posts' => $posts]);
+})->middleware('auth');
 
     return view('dashboard', compact('posts'));
 })->middleware('auth')->name('dashboard');
@@ -111,6 +102,22 @@ Route::put('/edit-post/{post}', [PostController::class, 'updatePost'])
     ->middleware('auth')
     ->name('posts.update');
 
-Route::delete('/delete-post/{post}', [PostController::class, 'deletePost'])
-    ->middleware('auth')
-    ->name('posts.destroy');
+Route::post('/create-post', [PostController::class, 'createPost']);
+Route::get('/edit-post/{post}', [PostController::class, 'showEditScreen']);
+Route::put('/edit-post/{post}', [PostController::class, 'updatePost']);
+Route::delete('/delete-post/{post}', [PostController::class, 'deletePost']);
+
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
+
+Route::post('/news/{id}/comments', [CommentController::class, 'store'])
+    ->name('comments.store');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])
+    ->name('comments.destroy');
+
+Route::get('/variety', [VarietyController::class, 'index']);
+Route::get('/manage-varieties', [VarietyController::class, 'manageScreen'])->middleware('auth');
+
+Route::post('/create-variety', [VarietyController::class, 'createVariety'])->middleware('auth');
+Route::get('/edit-variety/{variety}', [VarietyController::class, 'showEditScreen'])->middleware('auth');
+Route::put('/edit-variety/{variety}', [VarietyController::class, 'updateVariety'])->middleware('auth');
+Route::delete('/delete-variety/{variety}', [VarietyController::class, 'deleteVariety'])->middleware('auth');
