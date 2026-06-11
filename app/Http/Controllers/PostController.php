@@ -72,5 +72,20 @@ class PostController extends Controller
 
         return redirect('/dashboard');
     }
+    public function show($id)
+{
+    $post = Post::with(['user', 'comments.user'])->findOrFail($id);
+
+    $post->userRating = auth()->check()
+        ? \App\Models\Rating::where('post_id', $post->id)
+            ->where('user_id', auth()->id())
+            ->value('rating')
+        : 0;
+
+    $post->avgRating = \App\Models\Rating::where('post_id', $post->id)
+        ->avg('rating');
+
+    return view('news.show', compact('post'));
+}
 
 }

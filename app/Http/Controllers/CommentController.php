@@ -32,4 +32,21 @@ class CommentController extends Controller
 
     return back();
 }
+
+public function update(Request $request, Comment $comment)
+{
+    if (auth()->id() !== $comment->user_id) {
+        return back();
+    }
+
+    $request->validate([
+        'body' => 'required'
+    ]);
+
+    $comment->update([
+        'body' => trim($request->body)
+    ]);
+
+    return back();
+}
 }
