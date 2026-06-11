@@ -19,8 +19,7 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/pricemarket', [MarketPriceController::class, 'index'])
-    ->name('pricemarket');
+Route::get('/pricemarket', [MarketPriceController::class, 'index'])->name('pricemarket');;
 
 Route::get('/variety', function () {
     return view('variety');
