@@ -50,9 +50,31 @@
     </ul>
 </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-custom {{ request()->is('pricemarket') ? 'active' : '' }}"
-                            href="/pricemarket">Market Prices</a>
+                                    <li class="nav-item dropdown">
+                        <a class="nav-link nav-link-custom dropdown-toggle {{ request()->is('pricemarket') ? 'active' : '' }}"
+                        href="#" role="button" data-bs-toggle="dropdown">
+                            Market Prices
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('pricemarket') }}">
+                                    View Market Prices
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="{{ route('admin.market-prices.index') }}">
+                                    Manage Prices
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="{{ route('admin.market-prices.create') }}">
+                                    Add New Price
+                                </a>
+                            </li>
+                        </ul>
                     </li>
 
                     <li class="nav-item">
