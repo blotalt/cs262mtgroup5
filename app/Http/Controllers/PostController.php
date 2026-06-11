@@ -12,11 +12,19 @@ class PostController extends Controller
         $incomingFields = $request->validate([
             'title' => 'required',
             'body' => 'required',
+            'image' => 'nullable|image|max:2048',
         ]);
 
         $incomingFields['title'] = strip_tags($incomingFields['title']);
         $incomingFields['body'] = strip_tags($incomingFields['body']);
         $incomingFields['user_id'] = auth()->id();
+
+        $incomingFields['isTrending'] = $request->has('isTrending');
+
+
+    if ($request->hasFile('image')) {
+        $incomingFields['image'] = $request->file('image')->store('posts', 'public');
+    }
 
         Post::create($incomingFields);
 
@@ -24,7 +32,7 @@ class PostController extends Controller
     }
         public function news()
             {
-                $posts = Post::with('user')->latest()->get();
+                $posts = Post::with('user')->orderByDesc('isTrending')->latest()->get();
                 return view('news', ['posts' => $posts]);
             }
 
