@@ -19,6 +19,9 @@ class PostController extends Controller
         $incomingFields['body'] = strip_tags($incomingFields['body']);
         $incomingFields['user_id'] = auth()->id();
 
+        $incomingFields['isTrending'] = $request->has('isTrending');
+
+
     if ($request->hasFile('image')) {
         $incomingFields['image'] = $request->file('image')->store('posts', 'public');
     }
@@ -29,7 +32,7 @@ class PostController extends Controller
     }
         public function news()
             {
-                $posts = Post::with('user')->latest()->get();
+                $posts = Post::with('user')->orderByDesc('isTrending')->latest()->paginate(9);
                 return view('news', ['posts' => $posts]);
             }
 
@@ -51,10 +54,16 @@ class PostController extends Controller
         $incomingFields = $request->validate([
             'title' => 'required',
             'body' => 'required',
+             'image' => 'nullable|image|max:2048',
         ]);
 
         $incomingFields['title'] = strip_tags($incomingFields['title']);
         $incomingFields['body'] = strip_tags($incomingFields['body']);
+
+         $incomingFields['isTrending'] = $request->has('isTrending');
+         if ($request->hasFile('image')) {
+        $incomingFields['image'] = $request->file('image')->store('posts', 'public');
+    }
 
         $post->update($incomingFields);
 
@@ -69,5 +78,20 @@ class PostController extends Controller
 
         return redirect('/dashboard');
     }
+    public function show($id)
+{
+    $post = Post::with(['user', 'comments.user'])->findOrFail($id);
+
+    $post->userRating = auth()->check()
+        ? \App\Models\Rating::where('post_id', $post->id)
+            ->where('user_id', auth()->id())
+            ->value('rating')
+        : 0;
+
+    $post->avgRating = \App\Models\Rating::where('post_id', $post->id)
+        ->avg('rating');
+
+    return view('news.show', compact('post'));
+}
 
 }

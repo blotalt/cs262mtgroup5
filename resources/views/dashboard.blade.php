@@ -47,8 +47,20 @@
                              class="form-control mb-3"
                              type="file"
                              name="image"
-                             accept="image/*"
-    >
+                             accept="image/*">
+                             <div class = "form-check mb-3">
+                                <input
+                                    class="form-check-input"
+                                    type = "checkbox"
+                                    name = "isTrending"
+                                    value = "1"
+                                    id = "trendingCheck"
+                                    >
+                                    <label class = "form-check-label" for="trendingCheck">
+                                        Mark as Trending
+                                    </label>
+
+                             </div>
 
                             <button type="submit" class="btn btn-gold">
                                 Create Post
@@ -70,6 +82,9 @@
                             <div class="d-flex justify-content-between align-items-start gap-3">
                                 <div>
                                     <h4 class="fw-bold mb-1">{{ $post->title }}</h4>
+                                    @if($post->isTrending)
+    <span class="badge bg-danger mb-2">🔥 Trending</span>
+@endif
                                            @if($post->image)
                     <img src="{{ asset('storage/'.$post->image) }}"
                          class="img-fluid rounded mb-3"
@@ -86,7 +101,7 @@
                                     </p>
                                 </div>
 
-                                <div class="d-flex gap-2">
+                                {{-- <div class="d-flex gap-2">
                                     <a
                                         href="{{ url('/edit-post/'.$post->id) }}"
                                         class="btn btn-warning btn-sm"
@@ -102,7 +117,49 @@
                                             Delete
                                         </button>
                                     </form>
-                                </div>
+                                </div> --}}
+
+                                {{-- Edit + Delete buttons --}}
+<div class="d-flex gap-2">
+    <a href="{{ url('/edit-post/'.$post->id) }}" class="btn btn-warning btn-sm">Edit</a>
+
+    <button type="button" class="btn btn-outline-danger btn-sm"
+            data-bs-toggle="modal" data-bs-target="#deleteModal{{ $post->id }}">
+        Delete
+    </button>
+</div>
+
+{{-- Delete confirmation modal for THIS post --}}
+<div class="modal fade" id="deleteModal{{ $post->id }}" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold">Delete Post</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body text-center py-5">
+                <p class="fw-bold fs-4 mb-3">Are you sure you want to delete this post?</p>
+                <p class="text-muted fs-6 mb-0">This action cannot be undone.</p>
+            </div>
+
+            <div class="modal-footer border-0 justify-content-center gap-2">
+                <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+
+                {{-- <form action="{{ url('/delete-post/'.$post->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger px-4">Yes, Delete</button>
+                </form> --}}
+
+                <button type="button" class="btn btn-outline-danger btn-sm"
+        data-bs-toggle="modal" data-bs-target="#deleteModal{{ $post->id }}">
+    Delete
+</button>
+            </div>
+        </div>
+    </div>
+</div>
                             </div>
                         </div>
                     @empty

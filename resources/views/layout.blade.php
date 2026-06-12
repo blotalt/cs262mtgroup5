@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
     </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <style>
     :root {
@@ -124,6 +125,11 @@
         padding: 8px 16px;
         font-size: 0.9rem;
     }
+
+    .navbar {
+    position: relative;
+    z-index: 99999 !important;
+}
 
     /* Cards Setup */
     .rice-card {
@@ -356,7 +362,80 @@
     .khmer-footer hr {
         border-color: rgba(255, 255, 255, 0.2);
     }
-    </style>
+
+    .social-icons {
+    display: flex;
+    align-items: center;
+}
+
+    .social-icon {
+    color: var(--accent-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease;
+    text-decoration: none;
+}
+
+    .social-icon:hover {
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.social-icon:hover {
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+    /* ===== Green Pagination ===== */
+    .pagination {
+        --bs-pagination-color: #1b4d22;
+        --bs-pagination-hover-color: #1b4d22;
+        --bs-pagination-active-bg: #1b4d22;
+        --bs-pagination-active-border-color: #1b4d22;
+        --bs-pagination-hover-bg: #e9f3ec;
+    }
+    .pagination .page-item.active .page-link {
+        background-color: #1b4d22 !important;
+        border-color: #1b4d22 !important;
+        color: #fff !important;
+    }
+    .pagination .page-link {
+        color: #1b4d22 !important;
+    }
+    .pagination .page-link:hover {
+        background-color: #e9f3ec !important;
+        color: #1b4d22 !important;
+    }
+    .pagination .page-link:focus {
+        box-shadow: 0 0 0 0.25rem rgba(27, 77, 34, 0.25) !important;
+        color: #1b4d22 !important;
+    }
+    .pill-filter {
+    text-decoration: none;
+    color: #202020;
+}
+.pill-filter.active {
+    color: #fff;
+}
+
+.dropdown-sort {
+    color: #1b4d22 !important;
+    text-decoration: none;
+}
+
+.dropdown-sort:hover {
+    color: #1b4d22 !important;
+}
+
+.dropdown-sort.active {
+    color: #fff !important;
+    background-color: #1b4d22;
+}
+
+
+</style>
+    
 </head>
 
 <body>

@@ -1,78 +1,26 @@
-@php
-    $varieties = [
-        [
-            'name' => 'Phka Rumduol', 
-            'khmer' => 'ផ្ការំដួល', 
-            'img' => 'jasmine.png',
-            'location' => 'Takeo, Kampong Speu', 
-            'desc' => "Cambodia's most prized aromatic variety, awarded World's Best Rice multiple times. Delicate floral fragrance and soft...",
-            'type' => 'Jasmine', 'demand' => 'Very High', 'yield' => '3.2 t/ha', 'cycle' => '155 days', 'season' => 'Wet'
-        ],
-        [
-            'name' => 'Sen Kra Ob', 
-            'khmer' => 'សែនក្រអូប', 
-            'img' => 'fragrant.jpg',
-            'location' => 'Battambang, Pursat', 
-            'desc' => "The most widely grown variety in Cambodia. Reliable yield and mild flavor make it the staple export rice of the country.",
-            'type' => 'Jasmine', 'demand' => 'Very High', 'yield' => '5.5 t/ha', 'cycle' => '122 days', 'season' => 'Wet'
-        ],
-        [
-            'name' => 'Neab Dam', 
-            'khmer' => 'នាងដំ', 
-            'img' => 'blackrice.jpg',
-            'location' => 'Kampong Thom', 
-            'desc' => "Traditional Cambodian black rice with deep purple bran layer. Rich in anthocyanins, preferred for ceremonial dishes.",
-            'type' => 'Black Rice', 'demand' => 'High', 'yield' => '2.8 t/ha', 'cycle' => '148 days', 'season' => 'Dry'
-        ],
-        [
-            'name' => 'Phka Rumdeng', 
-            'khmer' => 'ផ្ការំដេង',
-            'img' => 'redrice.png', 
-            'location' => 'Takeo, Battambang, Siem Reap', 
-            'desc' => "A whole-grain red rice with a reddish-brown hue, due to its outer bran layer, which remains intact.",
-            'type' => 'Whole-grain', 'demand' => 'High', 'yield' => '3.2 t/ha', 'cycle' => '155 days', 'season' => 'Dry'
-        ],
-        [
-            'name' => 'Angkor Damnaeb', 
-            'khmer' => 'អង្ករដំណើប', 
-            'img' => 'glutinous.png',
-            'location' => 'Battambang, Pursat', 
-            'desc' => "When cooked, it is called បាយដំណើប (bai damnaeb). It is a cornerstone of Cambodian cuisine and is used in a wide variety of daily staples and festive desserts",
-            'type' => 'Glutinous', 'demand' => 'High', 'yield' => '5.5 t/ha', 'cycle' => '122 days', 'season' => 'Wet'
-        ],
-        [
-            'name' => 'Angkor Samroub', 
-            'khmer' => 'អង្ករសម្រូប', 
-            'img' => 'brown.png',
-            'location' => 'Preah Vihear, Kampong Speu', 
-            'desc' => "Unpolished rice that retains the bran layer, resulting in a tan color and chewier texture. Nutty and earthy with a firmer bite.",
-            'type' => 'Brown Rice', 'demand' => 'High', 'yield' => '2.8 t/ha', 'cycle' => '148 days', 'season' => 'All'
-        ]
-    ];
-@endphp
-
 @extends('layout')
 
 @section('hero')
-    <!-- Hero Info Banner Section -->
-        <div class="bg-header-green text-white pb-5">
+    <div class="bg-header-green text-white pb-5">
         <div class="container mt-0">
             <div class="row align-items-center">
                 <div class="col-lg-8">
-                    <span class="text-warning fw-bold small tracking-wider" style="font-size: 0.8rem;">LIVE DATA • UPDATED TODAY</span>
+                    {{-- <span class="text-warning fw-bold small tracking-wider" style="font-size: 0.8rem;">LIVE DATA • DATABASE CONNECTED</span> --}}
                     <h1 class="display-5 fw-bold mt-1 mb-2">Rice Varieties</h1>
                     <p class="text-white-50 lead fs-6">Explore Cambodia's diverse rice varieties and market demand</p>
+                    @auth
+                        <a href="/manage-varieties" class="btn btn-warning btn-sm fw-bold px-3 rounded-pill mt-2">⚙️ Open Management Workspace</a>
+                    @endauth
                 </div>
                 
-                <!-- Stats Dashboard Display Right -->
                 <div class="col-lg-4 d-flex justify-content-lg-end mt-4 mt-lg-0">
                     <div class="d-flex align-items-center bg-white bg-opacity-10 rounded p-3 text-center px-4">
                         <div class="px-3 stat-divider">
-                            <h3 class="fw-bold text-warning m-0">6</h3>
+                            <h3 class="fw-bold text-warning m-0">{{ $totalCount }}</h3>
                             <small class="text-white-50" style="font-size: 0.75rem;">Total Varieties</small>
                         </div>
                         <div class="px-3 stat-divider">
-                            <h3 class="fw-bold text-warning m-0">3</h3>
+                            <h3 class="fw-bold text-warning m-0">{{ $highDemandCount }}</h3>
                             <small class="text-white-50" style="font-size: 0.75rem;">High Demand</small>
                         </div>
                         <div class="px-3 ms-2">
@@ -87,75 +35,162 @@
 @endsection
 
 @section('content')
-<!-- Filter & Options Controls Panel -->
     <div class="container my-4">
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
-            
-            <!-- Left Side Search Input -->
-            <div class="d-flex align-items-center flex-grow-1 flex-md-grow-0" style="min-width: 260px;">
+            {{-- <div class="d-flex align-items-center flex-grow-1 flex-md-grow-0" style="min-width: 260px;">
                 <div class="position-relative w-100">
                     <input type="text" class="form-control search-filter-input" placeholder="Search varieties...">
-                    <span class="position-absolute top-50 start-3 translate-middle-y text-muted">🔍</span>
+                    <span class="position-absolute top-50 start-0 translate-middle-y ms-3 text-black-50 d-flex align-items-center"
+                            style="pointer-events: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor"
+                                class="bi bi-search" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                            </svg>
+                        </span>
                 </div>
-            </div>
+            </div> --}}
 
-            <!-- Scrollable Filter Chips -->
-            <div class="d-flex gap-2 overflow-auto py-1 align-items-center">
+
+            <div class="d-flex align-items-center flex-grow-1 flex-md-grow-0 position-relative" style="min-width: 260px;">
+    <form action="/variety" method="GET" class="position-relative w-100">
+        <input type="hidden" name="type" value="{{ request('type') }}">
+        <input type="hidden" name="sort" value="{{ request('sort') }}">
+
+        <input
+            type="text"
+            id="varietySearch"
+            name="search"
+            value="{{ request('search') }}"
+            class="form-control search-filter-input"
+            placeholder="Search varieties..."
+            autocomplete="off">
+
+        <span class="position-absolute top-50 start-3 translate-middle-y text-muted">🔍</span>
+    </form>
+
+    <div id="varietySuggest"
+         class="position-absolute bg-white border rounded shadow-sm w-100"
+         style="display:none; z-index:1000; top:44px; left:0; overflow:hidden;"></div>
+</div>
+
+<script>
+(function () {
+    const input = document.getElementById('varietySearch');
+    const box = document.getElementById('varietySuggest');
+    let timer;
+
+    input.addEventListener('input', function () {
+        clearTimeout(timer);
+        const q = input.value.trim();
+        if (!q) { box.style.display = 'none'; return; }
+
+        timer = setTimeout(() => {
+            fetch(`/variety/suggest?q=${encodeURIComponent(q)}`)
+                .then(res => res.json())
+                .then(items => {
+                    if (!items.length) { box.style.display = 'none'; return; }
+                    box.innerHTML = items.map(it => `
+                        <div class="suggestion px-3 py-2 d-flex justify-content-between align-items-center"
+                             data-label="${it.label}" style="cursor:pointer; color:#202020;">
+                            <span style="font-size:14px;">${it.label}</span>
+                            <span style="font-size:11px; color:#888;">${it.meta}</span>
+                        </div>
+                    `).join('');
+                    box.style.display = 'block';
+
+                    box.querySelectorAll('.suggestion').forEach(el => {
+                        el.addEventListener('click', () => {
+                            input.value = el.dataset.label;
+                            box.style.display = 'none';
+                            input.form.submit();
+                        });
+                        el.addEventListener('mouseenter', () => el.style.background = '#f3ece0');
+                        el.addEventListener('mouseleave', () => el.style.background = 'transparent');
+                    });
+                })
+                .catch(() => { box.style.display = 'none'; });
+        }, 250);
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!input.contains(e.target) && !box.contains(e.target)) {
+            box.style.display = 'none';
+        }
+    });
+})();
+</script>
+
+
+            {{-- <div class="d-flex gap-2 overflow-auto py-1 align-items-center">
                 <button class="pill-filter active">All Types</button>
                 <button class="pill-filter">Jasmine</button>
                 <button class="pill-filter">Black Rice</button>
-                
                 <button class="pill-filter">Glutinous</button>
                 <button class="pill-filter">Whole-Grain White</button>
                 <button class="pill-filter">Brown Rice</button>
-            </div>
+            </div> --}}
+<div class="d-flex gap-2 overflow-auto py-1 align-items-center">
+    <a href="/variety" class="pill-filter text-decoration-none {{ !request('type') ? 'active' : '' }}">All Types</a>
+    <a href="/variety?type=Jasmine" class="pill-filter text-decoration-none {{ request('type') == 'Jasmine' ? 'active' : '' }}">Jasmine</a>
+    <a href="/variety?type=Black Rice" class="pill-filter text-decoration-none {{ request('type') == 'Black Rice' ? 'active' : '' }}">Black Rice</a>
+    <a href="/variety?type=Glutinous" class="pill-filter text-decoration-none {{ request('type') == 'Glutinous' ? 'active' : '' }}">Glutinous</a>
+    <a href="/variety?type=Whole-Grain White" class="pill-filter text-decoration-none {{ request('type') == 'Whole-Grain White' ? 'active' : '' }}">Whole-Grain White</a>
+    <a href="/variety?type=Brown Rice" class="pill-filter text-decoration-none {{ request('type') == 'Brown Rice' ? 'active' : '' }}">Brown Rice</a>
+</div>
 
-            <!-- Sorting Dropdown Tool -->
-            <div>
-                <button class="dropdown-sort text-muted d-flex align-items-center gap-2">
-                    <span>⚙️</span> Demand: High to Low <span>▼</span>
-                </button>
-            </div>
+
+           <div>
+    <a href="/variety?type={{ request('type') }}&sort={{ request('sort') == 'az' ? 'za' : 'az' }}"
+       class="dropdown-sort text-decoration-none d-flex align-items-center gap-2 {{ request('sort') ? 'active' : '' }}">
+        <span>⚙️</span> Sort: {{ request('sort') == 'za' ? 'Z–A' : 'A–Z' }} <span>▼</span>
+    </a>
+</div>
         </div>
     </div>
-    <main class="container mb-5">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        @foreach($varieties as $rice)
-            <div class="col">
-                <div class="card h-100 rice-card border-0 shadow-sm rounded-4 overflow-hidden">
-                    <!-- Image Wrapper -->
-                    <div class="card-img-wrapper position-relative">
-                        <img src="{{ asset('images/ricetypes/' . $rice['img']) }}" class="card-img-top" alt="{{ $rice['name'] }}" style="height: 200px; object-fit: cover;">
-                        <span class="badge-type position-absolute top-0 start-0 m-3 bg-success">{{ $rice['type'] }}</span>
-                    </div>
-                    
-                    <div class="card-body p-4">
-                        <!-- Header: Name, Khmer, and Demand Badge -->
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <div>
-                                <h5 class="card-title fw-bold mb-0">{{ $rice['name'] }}</h5>
-                                <p class="text-muted small mb-2">{{ $rice['khmer'] }} • {{ $rice['location'] }}</p>
-                            </div>
-                            <div class="text-center">
-                                <span class="badge bg-success-subtle text-success px-3 py-1 rounded-pill">{{ $rice['demand'] }}</span>
-                                <div class="text-muted" style="font-size: 0.7rem;">Demand</div>
-                            </div>
+
+    <div class="container mb-5">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            @forelse($varieties as $rice)
+                <div class="col">
+                    <div class="card h-100 rice-card border-0 shadow-sm rounded-4 overflow-hidden">
+                        <div class="card-img-wrapper position-relative">
+                            <img src="{{ asset('storage/' . $rice->image) }}" class="card-img-top" alt="{{ $rice->name }}" style="height: 200px; object-fit: cover;">
+                            <span class="badge-type position-absolute top-0 start-0 m-3 bg-success">{{ $rice->type }}</span>
                         </div>
                         
-                        <!-- Description -->
-                        <p class="card-text text-muted small mb-4">{{ $rice['desc'] }}</p>
-                        
-                        <!-- Footer: Yield, Cycle, Season, Button -->
-                        <div class="d-flex justify-content-between align-items-center pt-3 border-top">
-                            <div class="text-center"><div class="fw-bold small">{{ $rice['yield'] }}</div><div class="text-muted" style="font-size: 0.7rem;">Yield</div></div>
-                            <div class="text-center"><div class="fw-bold small">{{ $rice['cycle'] }}</div><div class="text-muted" style="font-size: 0.7rem;">Cycle</div></div>
-                            <div class="text-center"><div class="fw-bold small">{{ $rice['season'] }}</div><div class="text-muted" style="font-size: 0.7rem;">Season</div></div>
-                            <button class="btn btn-success btn-sm rounded-pill px-3">View Details</button>
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div>
+                                    <h5 class="card-title fw-bold mb-0">{{ $rice->name }}</h5>
+                                    <p class="text-muted small mb-2">{{ $rice->khmer_name }} • {{ $rice->location }}</p>
+                                </div>
+                                <div class="text-center">
+                                    <span class="badge bg-success-subtle text-success px-3 py-1 rounded-pill">{{ $rice->demand }}</span>
+                                    <div class="text-muted" style="font-size: 0.7rem;">Demand</div>
+                                </div>
+                            </div>
+                            
+                            <p class="card-text text-muted small mb-4">{{ $rice->description }}</p>
+                            
+                            <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+                                <div class="text-center"><div class="fw-bold small">{{ $rice->yield }}</div><div class="text-muted" style="font-size: 0.7rem;">Yield</div></div>
+                                <div class="text-center"><div class="fw-bold small">{{ $rice->cycle }}</div><div class="text-muted" style="font-size: 0.7rem;">Cycle</div></div>
+                                <div class="text-center"><div class="fw-bold small">{{ $rice->season }}</div><div class="text-muted" style="font-size: 0.7rem;">Season</div></div>
+                                <button class="btn btn-success btn-sm rounded-pill px-3">View Details</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @empty
+                <div class="col-12 text-center py-5">
+                    <p class="text-muted lead">No rice varieties have been uploaded to the registry yet.</p>
+                </div>
+            @endforelse
+        </div>
+
+        <div class="d-flex justify-content-center mt-5">
+            {{ $varieties->links('pagination::bootstrap-5') }}
+        </div>
     </div>
-</main>
 @endsection
