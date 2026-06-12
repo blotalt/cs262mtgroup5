@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {{-- <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             @forelse($posts as $post)
                 <div class="col">
                     <article class="rice-card h-100 p-4">
@@ -76,7 +76,103 @@
                     </div>
                 </div>
             @endforelse
+        </div> --}}
+
+
+        <div class="row row-cols-1 g-4">
+    @forelse($posts as $post)
+        {{-- <div class="col">
+            <article class="rice-card h-100 p-4">
+                <span class="badge-type position-static d-inline-block mb-3">
+                    Market Update
+                </span>
+
+                @if($post->isTrending)
+                    <span class="badge bg-danger ms-2 mb-3">🔥 Trending</span>
+                @endif
+
+                <h4 class="fw-bold mb-2">{{ $post->title }}</h4>
+
+                @if($post->image)
+                    <img src="{{ asset('storage/'.$post->image) }}"
+                         class="img-fluid rounded mb-3"
+                         alt="{{ $post->title }}"
+                         style="max-height: 280px; width: 100%; object-fit: cover;">
+                @endif
+
+                <p class="text-muted small mb-3">
+                    By {{ $post->user->name }} · {{ $post->created_at->format('M d, Y') }}
+                </p>
+
+                <p class="text-muted mb-3">
+                    {{ Str::limit($post->body, 200) }}
+                </p>
+
+                <a href="{{ route('news.show', $post->id) }}"
+                   class="btn btn-success btn-sm rounded-pill px-3 mt-2">
+                    View Details
+                </a>
+            </article>
+        </div> --}}
+
+        <div class="col">
+    <article class="rice-card h-100 p-4">
+        <div class="row g-3 align-items-start">
+
+            {{-- LEFT: text content --}}
+            <div class="{{ $post->image ? 'col-md-8' : 'col-12' }}">
+                <span class="badge-type position-static d-inline-block mb-2">
+                    Market Update
+                </span>
+
+                @if($post->isTrending)
+                    <span class="badge bg-danger ms-2 mb-2">🔥 Trending</span>
+                @endif
+
+                <h4 class="fw-bold mb-2">{{ $post->title }}</h4>
+
+                <p class="text-muted small mb-3">
+                    By {{ $post->user->name }} · {{ $post->created_at->format('M d, Y') }}
+                </p>
+
+                <p class="text-muted mb-3">
+                    {{ Str::limit($post->body, 200) }}
+                </p>
+
+                <a href="{{ route('news.show', $post->id) }}"
+                   class="btn btn-success btn-sm rounded-pill px-3">
+                    View Details
+                </a>
+            </div>
+
+            
+            @if($post->image)
+                <div class="col-md-4">
+                    <img src="{{ asset('storage/'.$post->image) }}"
+                         class="img-fluid rounded"
+                         alt="{{ $post->title }}"
+                         style="height: 160px; width: 100%; object-fit: cover;">
+                </div>
+            @endif
+
         </div>
+    </article>
+</div>
+    @empty
+        <div class="col-12">
+            <div class="rice-card p-5 text-center">
+                <h4 class="fw-bold">No news posted yet</h4>
+                <p class="text-muted mb-0">
+                    New rice market updates will appear here.
+                </p>
+            </div>
+        </div>
+    @endforelse
+</div>
+
+<div class="d-flex justify-content-center mt-5">
+    {{ $posts->links('pagination::bootstrap-5') }}
+</div>
     </div>
 </section>
 @endsection

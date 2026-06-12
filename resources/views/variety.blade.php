@@ -37,7 +37,7 @@
 @section('content')
     <div class="container my-4">
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
-            <div class="d-flex align-items-center flex-grow-1 flex-md-grow-0" style="min-width: 260px;">
+            {{-- <div class="d-flex align-items-center flex-grow-1 flex-md-grow-0" style="min-width: 260px;">
                 <div class="position-relative w-100">
                     <input type="text" class="form-control search-filter-input" placeholder="Search varieties...">
                     <span class="position-absolute top-50 start-0 translate-middle-y ms-3 text-black-50 d-flex align-items-center"
@@ -49,7 +49,78 @@
                             </svg>
                         </span>
                 </div>
-            </div>
+            </div> --}}
+
+
+            <div class="d-flex align-items-center flex-grow-1 flex-md-grow-0 position-relative" style="min-width: 260px;">
+    <form action="/variety" method="GET" class="position-relative w-100">
+        <input type="hidden" name="type" value="{{ request('type') }}">
+        <input type="hidden" name="sort" value="{{ request('sort') }}">
+
+        <input
+            type="text"
+            id="varietySearch"
+            name="search"
+            value="{{ request('search') }}"
+            class="form-control search-filter-input"
+            placeholder="Search varieties..."
+            autocomplete="off">
+
+        <span class="position-absolute top-50 start-3 translate-middle-y text-muted">🔍</span>
+    </form>
+
+    <div id="varietySuggest"
+         class="position-absolute bg-white border rounded shadow-sm w-100"
+         style="display:none; z-index:1000; top:44px; left:0; overflow:hidden;"></div>
+</div>
+
+<script>
+(function () {
+    const input = document.getElementById('varietySearch');
+    const box = document.getElementById('varietySuggest');
+    let timer;
+
+    input.addEventListener('input', function () {
+        clearTimeout(timer);
+        const q = input.value.trim();
+        if (!q) { box.style.display = 'none'; return; }
+
+        timer = setTimeout(() => {
+            fetch(`/variety/suggest?q=${encodeURIComponent(q)}`)
+                .then(res => res.json())
+                .then(items => {
+                    if (!items.length) { box.style.display = 'none'; return; }
+                    box.innerHTML = items.map(it => `
+                        <div class="suggestion px-3 py-2 d-flex justify-content-between align-items-center"
+                             data-label="${it.label}" style="cursor:pointer; color:#202020;">
+                            <span style="font-size:14px;">${it.label}</span>
+                            <span style="font-size:11px; color:#888;">${it.meta}</span>
+                        </div>
+                    `).join('');
+                    box.style.display = 'block';
+
+                    box.querySelectorAll('.suggestion').forEach(el => {
+                        el.addEventListener('click', () => {
+                            input.value = el.dataset.label;
+                            box.style.display = 'none';
+                            input.form.submit();
+                        });
+                        el.addEventListener('mouseenter', () => el.style.background = '#f3ece0');
+                        el.addEventListener('mouseleave', () => el.style.background = 'transparent');
+                    });
+                })
+                .catch(() => { box.style.display = 'none'; });
+        }, 250);
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!input.contains(e.target) && !box.contains(e.target)) {
+            box.style.display = 'none';
+        }
+    });
+})();
+</script>
+
 
             {{-- <div class="d-flex gap-2 overflow-auto py-1 align-items-center">
                 <button class="pill-filter active">All Types</button>

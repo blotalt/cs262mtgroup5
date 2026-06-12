@@ -126,12 +126,13 @@
 
                                     <div class="d-flex flex-column gap-2">
                                         <a href="/edit-variety/{{ $item->id }}" class="btn btn-warning btn-sm fw-bold">Edit</a>
-                                        
-                                        <form action="/delete-variety/{{ $item->id }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this variety permanently?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-outline-danger btn-sm w-100">Delete</button>
-                                        </form>
+
+                                        <button type="button"
+                                                class="btn btn-sm btn-outline-danger"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#deleteVarietyModal{{ $item->id }}">
+                                            Delete
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -148,4 +149,30 @@
         </div>
     </div>
 </section>
+
+@foreach($myVarieties as $item)
+<div class="modal fade" id="deleteVarietyModal{{ $item->id }}" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold">Delete Variety</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center py-5">
+                <p class="fw-bold fs-4 mb-3">Delete this rice variety?</p>
+                <p class="text-muted fs-6 mb-0">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer border-0 justify-content-center gap-2">
+                <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+                <form action="/delete-variety/{{ $item->id }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger px-4">Yes, Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
 @endsection
