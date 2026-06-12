@@ -5,7 +5,7 @@
         <div class="container mt-0">
             <div class="row align-items-center">
                 <div class="col-lg-8">
-                    <span class="text-warning fw-bold small tracking-wider" style="font-size: 0.8rem;">LIVE DATA • DATABASE CONNECTED</span>
+                    {{-- <span class="text-warning fw-bold small tracking-wider" style="font-size: 0.8rem;">LIVE DATA • DATABASE CONNECTED</span> --}}
                     <h1 class="display-5 fw-bold mt-1 mb-2">Rice Varieties</h1>
                     <p class="text-white-50 lead fs-6">Explore Cambodia's diverse rice varieties and market demand</p>
                     @auth
