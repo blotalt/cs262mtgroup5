@@ -152,8 +152,8 @@
                     <button type="submit" class="btn btn-danger px-4">Yes, Delete</button>
                 </form> --}}
 
-                <button type="button" class="btn btn-sm btn-outline-danger"
-        data-bs-toggle="modal" data-bs-target="#deletePriceModal{{ $price->id }}">
+                <button type="button" class="btn btn-outline-danger btn-sm"
+        data-bs-toggle="modal" data-bs-target="#deleteModal{{ $post->id }}">
     Delete
 </button>
             </div>
