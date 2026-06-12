@@ -55,7 +55,7 @@ Route::post('/logout', [UserController::class, 'logout'])
 
 Route::get('/search', [SearchController::class, 'index']);
 Route::get('/search/suggest', [SearchController::class, 'suggest']);
-
+Route::get('/variety/suggest', [VarietyController::class, 'suggest']);
 /*
 |--------------------------------------------------------------------------
 | Dashboard

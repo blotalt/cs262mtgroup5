@@ -64,6 +64,25 @@ public function index(Request $request)
     ]);
 }
 
+ public function suggest(Request $request)
+    {
+        $q = $request->q;
+
+        if (!$q) {
+            return response()->json([]);
+        }
+
+        $varieties = Variety::where('name', 'like', "%{$q}%")
+            ->orWhere('khmer_name', 'like', "%{$q}%")
+            ->orWhere('location', 'like', "%{$q}%")
+            ->orWhere('type', 'like', "%{$q}%")
+            ->limit(6)
+            ->get(['name', 'type'])
+            ->map(fn($v) => ['label' => $v->name, 'meta' => $v->type]);
+
+        return response()->json($varieties);
+    }
+
     public function manageScreen()
     {
         $myVarieties = Variety::where('user_id', auth()->id())->latest()->get();

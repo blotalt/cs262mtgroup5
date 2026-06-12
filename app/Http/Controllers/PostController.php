@@ -32,7 +32,7 @@ class PostController extends Controller
     }
         public function news()
             {
-                $posts = Post::with('user')->orderByDesc('isTrending')->latest()->get();
+                $posts = Post::with('user')->orderByDesc('isTrending')->latest()->paginate(9);
                 return view('news', ['posts' => $posts]);
             }
 
@@ -54,10 +54,16 @@ class PostController extends Controller
         $incomingFields = $request->validate([
             'title' => 'required',
             'body' => 'required',
+             'image' => 'nullable|image|max:2048',
         ]);
 
         $incomingFields['title'] = strip_tags($incomingFields['title']);
         $incomingFields['body'] = strip_tags($incomingFields['body']);
+
+         $incomingFields['isTrending'] = $request->has('isTrending');
+         if ($request->hasFile('image')) {
+        $incomingFields['image'] = $request->file('image')->store('posts', 'public');
+    }
 
         $post->update($incomingFields);
 

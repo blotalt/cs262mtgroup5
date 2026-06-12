@@ -50,21 +50,16 @@
                                 @endif
                             </td>
                             <td class="text-end pe-3">
-                                <a href="{{ route('admin.market-prices.edit', $price->id) }}" 
+                                <a href="{{ route('admin.market-prices.edit', $price->id) }}"
                                    class="btn btn-sm btn-outline-secondary me-1">
                                     Edit
                                 </a>
-                                <form action="{{ route('admin.market-prices.destroy', $price->id) }}" 
-                                      method="POST" 
-                                      class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" 
-                                            class="btn btn-sm btn-outline-danger" 
-                                            onclick="return confirm('Delete this record?')">
-                                        Delete
-                                    </button>
-                                </form>
+                                <button type="button"
+                                        class="btn btn-sm btn-outline-danger"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deletePriceModal{{ $price->id }}">
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     @empty
@@ -76,6 +71,32 @@
                     @endforelse
                 </tbody>
             </table>
+
+            @foreach($prices as $price)
+            <div class="modal fade" id="deletePriceModal{{ $price->id }}" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header border-0">
+                            <h5 class="modal-title fw-bold">Delete Price</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body text-center py-5">
+                            <p class="fw-bold fs-4 mb-3">Delete this market price?</p>
+                            <p class="text-muted fs-6 mb-0">This action cannot be undone.</p>
+                        </div>
+                        <div class="modal-footer border-0 justify-content-center gap-2">
+                            <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+                            <form action="{{ route('admin.market-prices.destroy', $price->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger px-4">Yes, Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+
         </div>
     </div>
 
