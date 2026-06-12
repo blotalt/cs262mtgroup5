@@ -72,7 +72,7 @@
             </div>
 
             <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-gold px-4 fw-bold">Save Dynamic Matrix</button>
+                <button type="submit" class="btn btn-gold px-4 fw-bold">Save</button>
                 <a href="/manage-varieties" class="btn btn-outline-secondary">Cancel</a>
             </div>
         </form>

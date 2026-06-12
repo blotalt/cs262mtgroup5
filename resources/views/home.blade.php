@@ -34,7 +34,7 @@
             </div>
 
             <div class="carousel-item">
-                <img src="/images/extra/cambodia rice farmer.jpg" class="d-block w-100 carousel-img" alt="Cambodian rice farmer">
+                <img src="/images/extra/cambodiaricefarmer.jpg" class="d-block w-100 carousel-img" alt="Cambodian rice farmer">
 
                 <div class="carousel-caption text-start hero-content">
                     <span class="hero-badge">Cambodian Rice</span>
